@@ -12,11 +12,6 @@ client = gspread.authorize(creds)
 sheet = client.open("RADLY").sheet1
 data  = sheet.get_all_records()
 
-id = 1
-name = 2
-ca = 3
-phone_num = 4
-email = 5
 @app.get("/{course}/{name}/{cls}/{num}/{email}/")
 def read_item(course: str,name:str,cls :str , num:str , email :str):
     return {"course": course,
