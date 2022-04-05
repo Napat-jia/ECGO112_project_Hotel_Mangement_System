@@ -26,9 +26,6 @@ def read_item(course: str,name:str,cls :str , num:str , email :str):
             "email" : email,
             "check" : "สมัครเสร็จสิ้นค่ะ",
 
-
-
-
             "append":sheet.append_row([course,name,cls,num,email])}
 
 
