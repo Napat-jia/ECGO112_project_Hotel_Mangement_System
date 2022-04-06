@@ -14,7 +14,9 @@ creds = ServiceAccountCredentials.from_json_keyfile_name("key.json",scope)
 client = gspread.authorize(creds)
 sheet = client.open("RADLY").sheet1
 data  = sheet.get_all_records()
-@app.route("/{course}/{name}/{cls}/{num}/{email}", methods=['GET'])
+
+
+@app.get("/{course}/{name}/{cls}/{num}/{email}")
 def read_item(course: str,name:str,cls :str , num:str , email :str):
     return {"course": course,
             "name": name,
@@ -24,8 +26,6 @@ def read_item(course: str,name:str,cls :str , num:str , email :str):
             "check" : "สมัครเสร็จสิ้นค่ะ",
 
             "append":sheet.append_row([course,name,cls,num,email])}
-
-
 
 
 if __name__ == "__main__":
