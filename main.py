@@ -6,7 +6,7 @@ import fastapi
 
 
 
-app = FastAPI(__name__)
+app = FastAPI()
 
 scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
 
@@ -26,8 +26,6 @@ def read_item(course: str,name:str,cls :str , num:str , email :str):
 
             "append":sheet.append_row([course,name,cls,num,email])}
 
-if __name__ == '__main__':
-    app.run()
 
 
 
