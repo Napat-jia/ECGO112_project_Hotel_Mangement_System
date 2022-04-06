@@ -3,12 +3,12 @@ from oauth2client import client
 from oauth2client.service_account import ServiceAccountCredentials
 from fastapi import FastAPI
 import fastapi
-import gunicorn
+
 
 
 app = FastAPI()
 
-scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
+sope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
 
 creds = ServiceAccountCredentials.from_json_keyfile_name("key.json",scope)
 client = gspread.authorize(creds)
@@ -26,7 +26,3 @@ def read_item(course: str,name:str,cls :str , num:str , email :str):
             "check" : "สมัครเสร็จสิ้นค่ะ",
 
             "append":sheet.append_row([course,name,cls,num,email])}
-
-
-if __name__ == "__main__":
-    gunicorn.run(app)
