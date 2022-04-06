@@ -3,7 +3,7 @@ from oauth2client import client
 from oauth2client.service_account import ServiceAccountCredentials
 from fastapi import FastAPI
 import fastapi
-
+import uvicorn
 
 
 app = FastAPI()
@@ -27,5 +27,5 @@ def read_item(course: str,name:str,cls :str , num:str , email :str):
             "append":sheet.append_row([course,name,cls,num,email])}
 
 
-
-
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
