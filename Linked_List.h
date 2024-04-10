@@ -4,4 +4,6 @@ class Linked_List{
         int size
     public :
         void show_all(); 
+        void insert_node();
+        void check_in();
 }
