@@ -24,7 +24,15 @@ string login(){
         data.push_back(password);
     }
 
-    return data[0] ;
+    /*
+    
+    ทำหน้าล็อกอินรับอินพุต แล้วนำไปเช็คกับค่าใน csv file 
+    โดย data[เลขคู่] จะเป็น username data[เลขคี่] จะเป็น password
+    วิธีการเข้าถึงคือ data[0] data[1] เป็นต้น
+    
+    ไกด์ไลน์ใช้ for loop เช็ค user ก็อาจจะ i เพิ่มทีละสอง แล้วก็ input == data[i] มั้ย เป็นต้น (ถ้า userก็ i เริม่ที่ 0 เพราะ username เริ่ม 0)
+    
+    */
 
 }
 
