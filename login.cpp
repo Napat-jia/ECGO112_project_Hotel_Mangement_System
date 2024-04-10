@@ -13,10 +13,8 @@ string login(){
 
     ifstream myFile("username.csv"); //open file r
 
-    if(!myFile.is_open()){
-        cout << "can not open the file." ;
-    }
-
+    if(!myFile.is_open()) cout << "can not open the file." ;
+    
     while (getline (myFile, line)) {
         stringstream ss(line);
         getline(ss,username,',');
