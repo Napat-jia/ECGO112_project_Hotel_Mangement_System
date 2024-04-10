@@ -6,11 +6,13 @@
 
 using namespace std ;
 
-NODE::NODE(){
+NODE::NODE(string user,string type){
+
+    username = user;
+    room_type = type ;
+
     next =NULL;
-    username = "pond";
-    room_type = "deluxe" ;
-    n_person = 1 ;
+
 }
 
 NODE::~NODE(){
@@ -20,5 +22,16 @@ NODE::~NODE(){
     myFile << username <<","<< n_person <<"," << room_type <<endl; 
     // Close the file
     myFile.close();
+
+}
+
+void NODE_in_Q::show_node(string str){
+
+
+}
+
+
+void NODE_in_hotel::show_node(string str){
+
 
 }
