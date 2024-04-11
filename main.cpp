@@ -77,4 +77,5 @@ void Booking(){
     cout<<"Please enter the number of nights you plan to stay: ";
     cin>>t;
 
-}
+
+} 
