@@ -8,6 +8,6 @@ class NODE{
         
     public :
         NODE();
-        show_node(std::string);
+        //show_node(std::string);
         ~NODE();
 };
