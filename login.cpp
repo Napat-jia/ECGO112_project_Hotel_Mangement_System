@@ -23,12 +23,21 @@ string login(){
         data.push_back(username);
         data.push_back(password);
     }
+
+    cout << "Username: ";
+    cin >> username;
+
+    cout << "Password: ";
+    cin >> password;
     
-    
-    for(int i = 0 ;i < data.size();i+=2){
-        cout << data[i] ;
+    for(int i = 0 ;i < data.size();i += 2){ 
+        if(username == data[i] && password == data[i+1]){ 
+            cout << "Login Successful" << endl;
+            return username;
+        }
     }
     
+    cout << "Incorrect Username or Password. Please Try Again." << endl;
     /*
     
     ทำหน้าล็อกอินรับอินพุต แล้วนำไปเช็คกับค่าใน csv file 
@@ -42,6 +51,6 @@ string login(){
 }
 
 int main(){
-    
+    login();
     return 0 ;
 }
