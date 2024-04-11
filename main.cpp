@@ -4,8 +4,16 @@ using namespace std;
 
 int main(){
 
-    NODE pond ;
+    NODE* n = booking();
 
 
 
+}
+
+
+NODE* booking(){
+    
+
+    NODE a();
+    return a ;
 }

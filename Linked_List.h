@@ -5,21 +5,23 @@ class Linked_List{
     public :
         void show_all(); 
         virtual void insert_node()=0;
-}
+};
 
 
-class queue{
+class queue:public Linked_List{
     private :
         NODE *tail ;
     public :
         void insert_node();
-}
+        ~Linked_List();
+};
 
 
-class list_in_hotel(){
+class list_in_hotel : public Linked_List{
     
     private :
     public :
         void insert_node();
+        ~list_in_hotel();
 
-}
+};
