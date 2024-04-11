@@ -1,16 +1,18 @@
-void show_all(){
-
-}
-
-void insert_node(){
+void queue::insert_node(){
     
     
     size++;
 }
 
+void list_in_hotel::insert_node(){
+    
+    
+    size++;
+}
 
-void check_in(){
+list_in_hotel::~list_in_hotel(){
 
-        
+    ofstream myFile("NODE_in_hotel.csv"); //w
+    myFile.close();
 
 }

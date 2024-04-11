@@ -6,22 +6,31 @@
 
 using namespace std ;
 
-NODE::NODE(string user,string type){
+NODE::NODE(){
 
 
-    username = user;
-    room_type = type ;
-    next =NULL;
+    next = NULL;
+    room_id = 0 ;
 
 }
 
+
 NODE::~NODE(){
     
-    if
-    ofstream myFile("NODE_in_Q.csv"); //w
-    // Send data to the stream
-    myFile << username <<","<< n_person <<"," << room_type <<endl; 
-    // Close the file
-    myFile.close();
+    if(room_id==0){
+        ofstream myFile("NODE_in_Q.csv",a); //w
+        // Send data to the stream
+        myFile << username <<","<< n_person <<"," << room_type <<"," << night<<endl; 
+        // Close the file
+        myFile.close();
+    }
+
+    else{
+        ofstream myFile("NODE_in_hotel.csv",a); //w
+        // Send data to the stream
+        myFile << username <<","<< n_person <<"," << room_type <<endl; 
+        // Close the file
+        myFile.close();
+    }
 
 }

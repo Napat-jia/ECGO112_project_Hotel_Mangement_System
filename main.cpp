@@ -8,8 +8,8 @@ int main(){
     Booking();
 
 
-
 }
+<<<<<<< HEAD
 void Booking(){
     cout<<"====== BOOKING MENU ======="<<endl<<endl;
     cout<<"____ Type of room _____"<<endl;
@@ -79,3 +79,4 @@ void Booking(){
 
 
 } 
+
