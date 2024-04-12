@@ -20,7 +20,7 @@ int main(){
     if(!exist)
     {
         NODE *t = Booking(username);
-        Q.inset_node(t); //insert node เข้าไปใน linked list queue
+        Q.insert_node(t); //insert node เข้าไปใน linked list queue
 
         //cout << "User '" << username << "' does not exists in the system." << endl;
     }

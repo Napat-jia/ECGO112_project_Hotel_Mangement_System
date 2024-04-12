@@ -1,8 +1,13 @@
+#include "NODE.h"
 
-void queue::insert_node(){
+void queue::insert_node(NODE *&t){
     
     
     size++;
+}
+
+queue::~Linked_List(NODE *&t){
+    NODE* 
 }
 
 void list_in_hotel::insert_node(){
