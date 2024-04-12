@@ -30,9 +30,29 @@ NODE::~NODE(){
     else{
         ofstream myFile("NODE_in_hotel.csv",a); //w
         // Send data to the stream
-        myFile << username <<","<< n_person <<"," << room_type <<night<<endl; 
+        myFile << username <<","<< n_person <<"," << room_type <<","<<night<<endl; 
         // Close the file
         myFile.close();
     }
 
+}
+
+NODE* NODE::move_next(){
+      return next;
+}
+
+string NODE:: show_username(){
+    return username;
+}
+
+int NODE:: show_nperson(){
+    return n_person;
+}
+
+string NODE:: show_roomtype(){
+    return room_type;
+}
+
+int NODE:: show_night(){
+    return night;
 }

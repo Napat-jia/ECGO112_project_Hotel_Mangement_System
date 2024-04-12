@@ -8,14 +8,14 @@ void create_csv(){
 
     ofstream myFile("NODE_in_Q.csv"); //w
     // Send data to the stream
-    myFile << "Username" <<","<< "n_person" <<"," << "room_type"<<endl; 
+    myFile << "Username" <<","<< "n_person" <<"," << "room_type"<<","<<"night"<<endl; 
     // Close the file
     myFile.close();
 }
 
 vector<string> read(){
     vector<string> result;  //vector
-    string line,username,n_person,room_type ;
+    string line,username,n_person,room_type,n_night ;
     stringstream ss;
 
     ifstream myFile("NODE_in_Q.csv"); //open file r
@@ -29,9 +29,11 @@ vector<string> read(){
         getline(ss,username,',');
         getline(ss,n_person,',');
         getline(ss,room_type,',');
+        getline(ss,n_night,',');
         result.push_back(username);
         result.push_back(n_person);
         result.push_back(room_type);
+        result.push_back(n_night);
     }
 
     return result;
