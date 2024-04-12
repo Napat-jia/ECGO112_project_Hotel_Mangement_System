@@ -1,7 +1,7 @@
 class Linked_List{
     protected :
         NODE * head ;
-        int size
+        int size ;
     public :
         void show_all(); 
         virtual void insert_node()=0;
