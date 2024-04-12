@@ -37,7 +37,6 @@ string login(){
         if(username == data[i] && password == data[i+1]){ 
             cout << "Login Successful" << endl;
             return username;
-            break;
         }
     }
     
