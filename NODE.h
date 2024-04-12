@@ -8,7 +8,7 @@ class NODE{
         int service ;
         
     public :
-        NODE();
+        NODE(std::string a, int b,std::string c,int d);
         //show_node(std::string);
         ~NODE();
 };

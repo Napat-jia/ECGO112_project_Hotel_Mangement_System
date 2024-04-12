@@ -6,12 +6,14 @@
 
 using namespace std ;
 
-NODE::NODE(){
-
-
+NODE::NODE(std::string a,int b, std::string c, int d){
+    username = a;
+    n_person = b;
+    room_type = c;
+    night = d;
     next = NULL;
     room_id = 0 ;
-
+    service = 0;
 }
 
 
