@@ -1,4 +1,5 @@
 using namespace std;
+
 class Linked_List{
     protected :
         NODE * head ;

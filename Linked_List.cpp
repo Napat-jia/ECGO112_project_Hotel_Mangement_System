@@ -1,7 +1,14 @@
 using namespace std;
+#include"NODE.h"
+#include"Linked_List.h"
+
 void queue::insert_node(queue *q){
-    
-    
+    if(q){ 
+    q->next = NULL;
+    if(head == NULL) head = this;
+    else tail->next = this; 
+    tail = this; 
+    }
     size++;
 }
 
@@ -22,8 +29,7 @@ queue::~Linked_List(queue *q){
 }
 
 void list_in_hotel::insert_node(list_in_hotel *q){
-    
-    
+    q->next=this;
     size++;
 }
 
