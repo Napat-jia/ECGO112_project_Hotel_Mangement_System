@@ -16,8 +16,8 @@ queue::~Linked_List(queue *q){
     NODE* temp=q->head;
     ifstream myFile("NODE_in_Q.csv");
     myFile.remove();
+    ofstream myFile("NODE_in_Q.csv");
     if(temp){
-        ofstream myFile("NODE_in_Q.csv");
         myFile << temp->show_sername() <<","<< temp->show_nperson() <<"," << temp->show_roomtype()<<","<<temp->show_night()<<endl;
         q->headPtr=t->nextPtr;
         if(q->size==1)q->tailPtr=NULL;
@@ -37,8 +37,8 @@ list_in_hotel::~list_in_hotel(list_in_hotel *q){
 NODE* temp=q->head;
     ifstream myFile("NODE_in_hotel.csv");
     myFile.remove();
+    ofstream myFile("NODE_in_hotel.csv");
     if(temp){
-        ofstream myFile("NODE_in_hotel.csv");
         myFile << temp->show_sername() <<","<< temp->show_nperson() <<"," << temp->show_roomtype()<<","<<temp->show_night()<<endl;
         q->headPtr=t->nextPtr;
         if(q->size==1)q->tailPtr=NULL;
