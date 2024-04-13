@@ -10,7 +10,7 @@ string login(){
     vector<string> data;  //vector
     string line,username,password;
     stringstream ss;
-    char c;
+    int attempt = 0;
 
     ifstream myFile("username.csv"); //open file r
 
@@ -40,6 +40,7 @@ string login(){
     }
     
     cout << "Incorrect username or password. Please try again." << endl;
+    attempt++;
     }
     cout << "Too many login attempt. Please try again later.\n";
     exit(0);
