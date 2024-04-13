@@ -5,15 +5,12 @@
 
 using namespace std ;
 
-string getPasswordInput();
-
 string login(){
 
     vector<string> data;  //vector
-    string line,username,password,hide_pass;
+    string line,username,password;
     stringstream ss;
-    int attempt = 0;
-    char ch;
+    char c;
 
     ifstream myFile("username.csv"); //open file r
 
@@ -32,11 +29,9 @@ string login(){
     cout << "Username: ";
     cin >> username;
 
-    
-
     cout << "Password: ";
     cin >> password;
-    
+
     for(int i = 0 ;i < data.size();i += 2){ 
         if(username == data[i] && password == data[i+1]){ 
             cout << "Login Successful" << endl;
@@ -45,7 +40,6 @@ string login(){
     }
     
     cout << "Incorrect username or password. Please try again." << endl;
-    attempt++; 
     }
     cout << "Too many login attempt. Please try again later.\n";
     exit(0);
