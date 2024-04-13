@@ -6,7 +6,6 @@ class NODE{
         std::string username , room_type ;
         int n_person ;
         int room_id ;
-        int room_type;
         int night;
         int food,laundry,shuttle,extrabed ;
     public :
@@ -14,13 +13,13 @@ class NODE{
         //show_node(std::string);
         ~NODE();
         NODE* move_next();
-        string NODE:: show_username();
-        int NODE:: show_nperson();
-        int NODE:: show_room_id();
-        string NODE:: show_roomtype();
-        int NODE:: show_night();
-        int NODE:: show_food();
-        int NODE:: show_laundry();
-        int NODE:: show_shuttle();
-        int NODE:: show_extrabed();
+        string show_username();
+        int show_nperson();
+        int show_room_id();
+        string show_roomtype();
+        int show_night();
+        int show_food();
+        int show_laundry();
+        int show_shuttle();
+        int show_extrabed();
 };

@@ -2,7 +2,7 @@ using namespace std;
 #include"NODE.h"
 #include"Linked_List.h"
 
-void queue::insert_node(queue *q){
+void queue::insert_node(queue* q){
     if(q){ 
     q->next = NULL;
     if(head == NULL) head = this;
@@ -12,7 +12,7 @@ void queue::insert_node(queue *q){
     size++;
 }
 
-queue::~Linked_List(queue *q){
+queue::~Linked_List(queue* q){
     NODE* temp=q->head;
     ifstream myFile("NODE_in_Q.csv");
     myFile.remove();
@@ -28,12 +28,12 @@ queue::~Linked_List(queue *q){
 
 }
 
-void list_in_hotel::insert_node(list_in_hotel *q){
+void list_in_hotel::insert_node(list_in_hotel* q){
     q->next=this;
     size++;
 }
 
-list_in_hotel::~list_in_hotel(list_in_hotel *q){
+list_in_hotel::~list_in_hotel(list_in_hotel* q){
 NODE* temp=q->head;
     ifstream myFile("NODE_in_hotel.csv");
     myFile.remove();
