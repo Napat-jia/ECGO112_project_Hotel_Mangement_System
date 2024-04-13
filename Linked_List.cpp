@@ -39,7 +39,9 @@ NODE* temp=q->head;
     myFile.remove();
     ofstream myFile("NODE_in_hotel.csv");
     if(temp){
-        myFile << temp->show_sername() <<","<< temp->show_nperson() <<"," << temp->show_roomtype()<<","<<temp->show_night()<<endl;
+        myFile << temp->show_sername() <<","<< temp->show_nperson() <<"," << temp->show_room_id()<<",";
+        myFile<<temp->show_roomtype()<<","<<temp->show_night()<<","<< temp->show_food() <<",";
+        myFile << temp->show_laundry() <<"," << temp->show_shuttle()<<","<<temp->show_extrabed()<<endl;
         q->headPtr=t->nextPtr;
         if(q->size==1)q->tailPtr=NULL;
         q->size--;

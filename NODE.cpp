@@ -49,10 +49,30 @@ int NODE:: show_nperson(){
     return n_person;
 }
 
+int NODE:: show_room_id(){
+    return room_id;
+}
+
 string NODE:: show_roomtype(){
     return room_type;
 }
 
 int NODE:: show_night(){
     return night;
+}
+
+int NODE:: show_food(){
+    return food;
+}
+
+int NODE:: show_laundry(){
+    reutrn laundry;
+}
+
+int NODE:: show_shuttle(){
+    return shuttle;
+}
+
+int NODE:: show_extrabed(){
+    return extrabed;
 }
