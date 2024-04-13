@@ -3,15 +3,14 @@
 #include <vector>
 #include <sstream>
 
-
 using namespace std ;
 
 string login(){
 
     vector<string> data;  //vector
-    string line,username,password,hide_pass;
+    string line,username,password;
     stringstream ss;
-    char c;
+    int attempt = 0;
 
     ifstream myFile("username.csv"); //open file r
 
@@ -26,22 +25,24 @@ string login(){
         data.push_back(password);
     }
 
-    while(1){
+    while(attempt < 3){
     cout << "Username: ";
     cin >> username;
 
     cout << "Password: ";
     cin >> password;
-    
+
     for(int i = 0 ;i < data.size();i += 2){ 
         if(username == data[i] && password == data[i+1]){ 
             cout << "Login Successful" << endl;
             return username;
         }
     }
-    
     cout << "Incorrect Username or Password. Please Try Again." << endl;
+    attempt++;
     }
+    cout << "Too many login attempt. Please try again later.\n";
+    exit(0);
     /*
     
     ทำหน้าล็อกอินรับอินพุต แล้วนำไปเช็คกับค่าใน csv file 
