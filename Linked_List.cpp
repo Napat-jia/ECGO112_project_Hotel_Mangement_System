@@ -19,8 +19,8 @@ void queue::destruct_Linked_List(queue* q){
     ofstream myFile("NODE_in_Q.csv");
     if(temp){
         myFile << temp->show_sername() <<","<< temp->show_nperson() <<"," << temp->show_roomtype()<<","<<temp->show_night()<<endl;
-        q->headPtr=t->nextPtr;
-        if(q->size==1)q->tailPtr=NULL;
+        q->head=temp->move_next();
+        if(q->size==1)q->tail=NULL;
         q->size--;
         free(temp);
     }
@@ -42,8 +42,8 @@ NODE* temp=q->head;
         myFile << temp->show_sername() <<","<< temp->show_nperson() <<"," << temp->show_room_id()<<",";
         myFile<<temp->show_roomtype()<<","<<temp->show_night()<<","<< temp->show_food() <<",";
         myFile << temp->show_laundry() <<"," << temp->show_shuttle()<<","<<temp->show_extrabed()<<endl;
-        q->headPtr=t->nextPtr;
-        if(q->size==1)q->tailPtr=NULL;
+        q->head=temp->move_next();
+        if(q->size==1)q->tail=NULL;
         q->size--;
         free(temp);
     }
