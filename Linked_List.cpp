@@ -12,7 +12,7 @@ void queue::insert_node(queue* q){
     size++;
 }
 
-queue::~Linked_List(queue* q){
+void queue::destruct_Linked_List(queue* q){
     NODE* temp=q->head;
     ifstream myFile("NODE_in_Q.csv");
     myFile.remove();
@@ -33,7 +33,7 @@ void list_in_hotel::insert_node(list_in_hotel* q){
     size++;
 }
 
-list_in_hotel::~list_in_hotel(list_in_hotel* q){
+void list_in_hotel::destruct_list_in_hotel(list_in_hotel* q){
 NODE* temp=q->head;
     ifstream myFile("NODE_in_hotel.csv");
     myFile.remove();

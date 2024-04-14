@@ -15,7 +15,7 @@ class queue:public Linked_List{
         NODE *tail ;
     public :
         void insert_node(queue* q);
-        ~Linked_List(queue* q);
+        void destruct_Linked_List(queue* q);
 };
 
 
@@ -24,6 +24,6 @@ class list_in_hotel : public Linked_List{
         NODE *tail ;
     public :
         void insert_node(list_in_hotel* q);
-        ~list_in_hotel(list_in_hotel* q);
+        void destruct_list_in_hotel(list_in_hotel* q);
 
 };
