@@ -65,11 +65,11 @@ void Register() {
     cin >> password;
 
     ofstream myFile("username.csv", ios::app); // open file for appending
-    if(myFile.is_open()) {
+    if(!myFile.is_open()) {
+        cout << "Can't open file for registration" << endl;
+    } else {
         myFile << username << "," << password << endl;
         cout << "Registration Successfull" << endl;
-    } else {
-        cout << "Can't open file for registration" << endl;
     }
 }
 
