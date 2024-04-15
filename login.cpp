@@ -3,6 +3,8 @@
 #include <vector>
 #include <sstream>
 
+bool user_exist(std::string);
+
 using namespace std ;
 
 string login(){
@@ -58,11 +60,19 @@ string login(){
 void Register() {
     string username, password;
     
-    cout << "Enter new username: ";
-    cin >> username;
-    
+    while(1){
+        cout << "Enter new username: ";
+        cin >> username;
+
+        if(user_exist(username)){
+            cout << "Username already exists. Please choose a new one." << endl;
+            continue;
+        }
+        else break;
+    }
     cout << "Enter password    : ";
     cin >> password;
+    
 
     ofstream myFile("username.csv", ios::app); // open file for appending
     if(!myFile.is_open()) {
@@ -71,8 +81,23 @@ void Register() {
         myFile << username << "," << password << endl;
         cout << "Registration Successfull" << endl;
     }
+    
 }
-
+bool user_exist(string username){
+    
+    string line, exist_username;
+    
+    ifstream myFile("username.csv");
+    
+    while(getline (myFile, line)){
+        stringstream ss(line);
+        getline(ss, exist_username, ',');
+        if(username == exist_username){
+            return true;
+        }
+    }
+    return false;
+}
 
 int main(){
     Register();
