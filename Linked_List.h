@@ -1,4 +1,5 @@
 using namespace std;
+#include"NODE.h"
 
 class Linked_List{
     protected :
@@ -14,7 +15,7 @@ class queue:public Linked_List{
     private :
         NODE *tail ;
     public :
-        void insert_node(queue* q);
+        void insert_node(NODE* q);
         void destruct_Linked_List(queue* q);
 };
 
@@ -23,7 +24,7 @@ class list_in_hotel : public Linked_List{
     private :
         NODE *tail ;
     public :
-        void insert_node(list_in_hotel* q);
+        void insert_node(NODE* q);
         void destruct_list_in_hotel(list_in_hotel* q);
 
 };

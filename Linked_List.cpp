@@ -2,11 +2,10 @@ using namespace std;
 #include"NODE.h"
 #include"Linked_List.h"
 
-void queue::insert_node(queue* q){
-    NODE* new_node = new NODE();
-    if(head == NULL) head = tail = new_node;
-    else tail->next = new_node; 
-    tail = new_node;
+void queue::insert_node(NODE* q){
+    if(head == NULL) head = tail = q;
+    else tail->move_next() = q; 
+    tail = q;
     size++;
 }
 
@@ -26,11 +25,10 @@ void queue::destruct_Linked_List(queue* q){
 
 }
 
-void list_in_hotel::insert_node(list_in_hotel* q){
-    NODE* new_node = new NODE();
-    if(head == NULL) head = tail = new_node;
-    else tail->next = new_node; 
-    tail = new_node;
+void list_in_hotel::insert_node(NODE* q){
+    if(head == NULL) head = tail = q;
+    else tail->move_next() = q; 
+    tail = q;
     size++;
 }
 
