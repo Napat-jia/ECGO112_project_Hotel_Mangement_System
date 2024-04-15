@@ -53,10 +53,16 @@ queue::queue(int s){
 }
 
 void list_in_hotel::insert_node(NODE* &q){
-    NODE* temp = head ;
+    NODE* temp;
     if(head == NULL) head = q;
-    //else tail->move_next() = q; 
-    //tail = q;
+    else {
+        temp = head;
+        while(temp->move_next() != NULL)
+        {
+            temp = temp->move_next();
+        }
+        temp->move_next() = q;
+    }
     size++;
 }
 
