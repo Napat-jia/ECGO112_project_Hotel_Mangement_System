@@ -14,7 +14,7 @@ string login(){
 
     ifstream myFile("username.csv"); //open file r
 
-    if(!myFile.is_open()) cout << "can not open the file." ;
+    if(!myFile.is_open()) cout << "Can't open file." ;
     
     while (getline (myFile, line)) {
         stringstream ss(line);
@@ -42,7 +42,7 @@ string login(){
     cout << "Incorrect username or password. Please try again." << endl;
     attempt++;
     }
-    cout << "Too many login attempt. Please try again later.\n";
+    cout << "Too many login attempt. Please try again later." << endl;
     exit(0);
     /*
     
@@ -55,8 +55,27 @@ string login(){
     */
 }
 
+void Register() {
+    string username, password;
+    
+    cout << "Enter new username: ";
+    cin >> username;
+    
+    cout << "Enter password    : ";
+    cin >> password;
+
+    ofstream myFile("username.csv", ios::app); // open file for appending
+    if(myFile.is_open()) {
+        myFile << username << "," << password << endl;
+        cout << "Registration Successfull" << endl;
+    } else {
+        cout << "Can't open file for registration" << endl;
+    }
+}
+
 
 int main(){
-    login();
+    Register();
+    //login();
     return 0 ;
 }
