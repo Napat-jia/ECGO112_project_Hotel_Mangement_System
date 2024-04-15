@@ -3,12 +3,10 @@ using namespace std;
 #include"Linked_List.h"
 
 void queue::insert_node(queue* q){
-    if(q){ 
-    q->next = NULL;
-    if(head == NULL) head = this;
-    else tail->next = this; 
-    tail = this; 
-    }
+    NODE* new_node = new NODE();
+    if(head == NULL) head = tail = new_node;
+    else tail->next = new_node; 
+    tail = new_node;
     size++;
 }
 
@@ -29,7 +27,10 @@ void queue::destruct_Linked_List(queue* q){
 }
 
 void list_in_hotel::insert_node(list_in_hotel* q){
-    q->next=this;
+    NODE* new_node = new NODE();
+    if(head == NULL) head = tail = new_node;
+    else tail->next = new_node; 
+    tail = new_node;
     size++;
 }
 
