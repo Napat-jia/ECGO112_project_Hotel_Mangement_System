@@ -31,12 +31,37 @@ int main(){
     */
 
     Linked_List* LL ;
-    LL = new queue(0) ;
+    LL = new queue ;
 
+    //set up queue
+
+    ifstream myFile("NODE_in_Q.csv"); //open file r
+
+    if(!myFile.is_open())cout << "can not open the file!."<<endl ;
+
+    else{
+        
+        string line,user,person,room,n_night ;
+        stringstream ss;
+
+        while (getline (myFile, line)) {
+            stringstream ss(line);
+            getline(ss,user,',');
+            getline(ss,person,',');
+            getline(ss,room,',');
+            getline(ss,n_night,',');
+
+            NODE* customer = new NODE(user,stoi(person),room,stoi(n_night));
+            LL->insert_node(customer) ;
+        }
+    }
+    myFile.close();
+    
     string usernames = login() ;
     NODE *a = Booking(usernames) ;
+    LL ->insert_node(a);
 
-    delete a ;
+    delete LL ;
     return 0;
 }
 

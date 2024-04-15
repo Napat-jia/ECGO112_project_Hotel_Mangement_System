@@ -5,11 +5,13 @@ using namespace std;
 #include"NODE.h"
 #include"Linked_List.h"
 
+void Linked_List::insert_node(NODE*&q) {cout << "test " ;}
+
 void queue::insert_node(NODE*&q){
+    
     if(head == NULL) head = tail = q;
     else {
-        tail = tail->move_next() ;
-        tail = q; 
+        tail -> insert(q) ; 
         }
     tail = q;
     size++;
@@ -33,21 +35,21 @@ void queue::destruct_Linked_List(queue* q){
 
 queue::~queue(){
 
-    NODE* temp=head;
-
     remove("NODE_in_Q.csv");
-   
-    if(temp){
-        head=temp->move_next();
-        if(size==1)tail=NULL;
-        size--;
-        delete temp;
+    while(head!=NULL){
+
+        NODE* temp=head;
+        if(temp){
+            head=temp->move_next();
+            //if(size==1)tail=NULL;
+            size--;
+            delete temp;
+            }
     }
 }
 
-queue::queue(int s){
-
-    size = s ;
+queue::queue(){
+    size = 0 ;
     head = NULL ;
     tail = NULL ;
 }
@@ -61,7 +63,7 @@ void list_in_hotel::insert_node(NODE* &q){
         {
             temp = temp->move_next();
         }
-        temp->move_next() = q;
+        //temp->move_next() = q;
     }
     size++;
 }
@@ -93,4 +95,10 @@ list_in_hotel::~list_in_hotel(){
 
 Linked_List::~Linked_List(){
     
+}
+
+
+list_in_hotel::list_in_hotel(){
+
+
 }

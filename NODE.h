@@ -24,6 +24,8 @@ class NODE{
         int show_laundry();
         int show_shuttle();
         int show_extrabed();
+        void insert(NODE*& );
+
 };
 
 #endif

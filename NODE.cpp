@@ -79,3 +79,7 @@ int NODE:: show_shuttle(){
 int NODE:: show_extrabed(){
     return extrabed;
 }
+
+void NODE::insert(NODE*& x){
+     this -> next = x ;
+    }
