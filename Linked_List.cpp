@@ -1,14 +1,20 @@
 using namespace std;
+#include <iostream>
+
+
 #include"NODE.h"
 #include"Linked_List.h"
 
-void queue::insert_node(NODE* q){
+void queue::insert_node(NODE*&q){
     if(head == NULL) head = tail = q;
-    else tail->move_next() = q; 
+    else {
+        tail = tail->move_next() ;
+        tail = q; 
+        }
     tail = q;
     size++;
 }
-
+/*
 void queue::destruct_Linked_List(queue* q){
     NODE* temp=q->head;
     ifstream myFile("NODE_in_Q.csv");
@@ -23,15 +29,38 @@ void queue::destruct_Linked_List(queue* q){
     }
     myFile.close();
 
+}*/
+
+queue::~queue(){
+
+    NODE* temp=head;
+
+    remove("NODE_in_Q.csv");
+   
+    if(temp){
+        head=temp->move_next();
+        if(size==1)tail=NULL;
+        size--;
+        delete temp;
+    }
 }
 
-void list_in_hotel::insert_node(NODE* q){
-    if(head == NULL) head = tail = q;
-    else tail->move_next() = q; 
-    tail = q;
+queue::queue(int s){
+
+    size = s ;
+    head = NULL ;
+    tail = NULL ;
+}
+
+void list_in_hotel::insert_node(NODE* &q){
+    NODE* temp = head ;
+    if(head == NULL) head = q;
+    //else tail->move_next() = q; 
+    //tail = q;
     size++;
 }
 
+/*
 void list_in_hotel::destruct_list_in_hotel(list_in_hotel* q){
 NODE* temp=q->head;
     ifstream myFile("NODE_in_hotel.csv");
@@ -47,4 +76,15 @@ NODE* temp=q->head;
         free(temp);
     }
     myFile.close();
+}
+*/
+
+
+list_in_hotel::~list_in_hotel(){
+
+
+}
+
+Linked_List::~Linked_List(){
+    
 }

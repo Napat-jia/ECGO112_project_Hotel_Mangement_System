@@ -4,18 +4,19 @@
 
 #include "NODE.h"
 #include "Linked_List.h"
+#include "login.h"
 
 using namespace std;
 NODE* Booking(string username);
 bool check_user(string username);
 int main(){
-    
+    /*
     //ลอง check เฉยๆ ************
     /*
     string username;
     cout<<"Enter username: ";
     cin>>username;
-    */
+    
     //username = login(); เอามาจาก login.cpp ?
     queue Q;
     bool exist = check_user(username);
@@ -26,7 +27,16 @@ int main(){
 
         //cout << "User '" << username << "' does not exists in the system." << endl;
     }
-    //else cout << "User '" << username << "' exists in the system." << endl;
+    //else cout << "User '" << username << "' exists in the system." << endl; 
+    */
+
+    Linked_List* LL ;
+    LL = new queue(0) ;
+
+    string usernames = login() ;
+    NODE *a = Booking(usernames) ;
+
+    delete a ;
     return 0;
 }
 

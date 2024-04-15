@@ -99,8 +99,10 @@ bool user_exist(string username){
     return false;
 }
 
+/*
 int main(){
     Register();
     //login();
     return 0 ;
 }
+*/

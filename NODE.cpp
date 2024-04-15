@@ -13,14 +13,17 @@ NODE::NODE(string a,int b,string c, int d){
     night = d;
     next = NULL;
     room_id = 0 ;
-    service = 0;
+    food = 0;
+    laundry=0;
+    shuttle=0;
+    extrabed = 0;
 }
 
 
 NODE::~NODE(){
     
     if(room_id==0){
-        ofstream myFile("NODE_in_Q.csv",a); //w
+        ofstream myFile("NODE_in_Q.csv",ios::app); //w
         // Send data to the stream
         myFile << username <<","<< n_person <<"," << room_type <<"," << night<<endl; 
         // Close the file
@@ -28,7 +31,7 @@ NODE::~NODE(){
     }
 
     else{
-        ofstream myFile("NODE_in_hotel.csv",a); //w
+        ofstream myFile("NODE_in_hotel.csv",ios::app); //w
         // Send data to the stream
         myFile << username <<","<< n_person <<"," << room_type <<","<<night<<endl; 
         // Close the file
@@ -66,7 +69,7 @@ int NODE:: show_food(){
 }
 
 int NODE:: show_laundry(){
-    reutrn laundry;
+    return laundry;
 }
 
 int NODE:: show_shuttle(){

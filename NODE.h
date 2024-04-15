@@ -1,4 +1,6 @@
 using namespace std;
+#ifndef NODE_H
+#define NODE_H
 
 class NODE{
     private :
@@ -23,3 +25,5 @@ class NODE{
         int show_shuttle();
         int show_extrabed();
 };
+
+#endif
