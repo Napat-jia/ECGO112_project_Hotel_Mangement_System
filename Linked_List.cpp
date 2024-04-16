@@ -55,6 +55,38 @@ queue::queue(){
 }
 
 void list_in_hotel::insert_node(NODE* &q){
+    if (head == NULL) {
+        head = q;
+        size++;
+    }
+    else {
+    NODE* current = head;
+    NODE* previous = NULL;
+    int value = q->show_room_id();
+    while (current != NULL && current->show_room_id() < value) {
+        previous = current;
+        current = current->move_next();
+    }
+
+    if (previous == NULL) 
+    {
+        //beginning
+        q->insert(head);
+        head = q;
+    } 
+    else 
+    {
+        q->insert(current);
+        previous->insert(q);
+    }
+
+    size++;
+    }
+}
+
+
+/*
+void list_in_hotel::insert_node(NODE* &q){
     NODE* temp;
     if(head == NULL) head = q;
     else {
@@ -67,7 +99,7 @@ void list_in_hotel::insert_node(NODE* &q){
     }
     size++;
 }
-
+*/
 /*
 void list_in_hotel::destruct_list_in_hotel(list_in_hotel* q){
 NODE* temp=q->head;
