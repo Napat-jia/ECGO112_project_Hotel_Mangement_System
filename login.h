@@ -4,6 +4,7 @@
 #include <sstream>
 
 bool user_exist(std::string);
+bool check_name(std::string);
 
 using namespace std ;
 
@@ -58,11 +59,17 @@ string login(){
 }
 
 void Register() {
+    
     string username, password;
     
     while(1){
         cout << "Enter new username: ";
         cin >> username;
+
+        if (check_name(username) == true){
+            cout << "Invalid username. Please try again." << endl;
+            continue;
+        }
 
         if(user_exist(username)){
             cout << "Username already exists. Please choose a new one." << endl;
@@ -93,6 +100,19 @@ bool user_exist(string username){
         stringstream ss(line);
         getline(ss, exist_username, ',');
         if(username == exist_username){
+            return true;
+        }
+    }
+    return false;
+}
+
+bool check_name(string username) {
+    
+    int i;
+    
+    for(i=0;i<username.size();i++){
+       char ch = username[i];
+        if(ch == '/' || ch == '\\' || ch == ',' || ch == '.' || ch == '(' || ch == ')' || ch == '^' || ch == '*' || ch == '[' || ch == ']' || ch == '{' || ch == '}' || ch == '&' || ch == '!' || ch == '#' || ch == '%'){
             return true;
         }
     }
