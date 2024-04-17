@@ -29,39 +29,56 @@ int main(){
     }
     //else cout << "User '" << username << "' exists in the system." << endl; 
     */
-
-    Linked_List* LL ;
-    LL = new queue ;
+    
+    Linked_List* LL[3]  ; // 1 => standard, 2 => deluxe, 3 => family
+    LL[0] = new queue ;
+    LL[1] = new queue ;
+    LL[2] = new queue ;
 
     //set up queue
+    for(int i = 0 ; i < 3; i++ ){
 
-    ifstream myFile("NODE_in_Q.csv"); //open file r
+        string file_name ;
 
-    if(!myFile.is_open())cout << "can not open the file!."<<endl ;
-
-    else{
+        if(i==0) file_name = "NODE_in_Q_standard.csv" ;
+        else if(i==1) file_name = "NODE_in_Q_deluxe.csv" ;
+        else if(i==2) file_name = "NODE_in_Q_family.csv" ;
         
-        string line,user,person,room,n_night ;
-        stringstream ss;
+        ifstream myFile(file_name); //open file r
+        
+        if(!myFile.is_open())cout << "can not open the file!."<<endl ;
 
-        while (getline (myFile, line)) {
-            stringstream ss(line);
-            getline(ss,user,',');
-            getline(ss,person,',');
-            getline(ss,room,',');
-            getline(ss,n_night,',');
+        else{
+        
+            string line,user,person,room,n_night ;
+            stringstream ss;
 
-            NODE* customer = new NODE(user,stoi(person),room,stoi(n_night));
-            LL->insert_node(customer) ;
+            while (getline (myFile, line)) {
+                stringstream ss(line);
+                getline(ss,user,',');
+                getline(ss,person,',');
+                getline(ss,room,',');
+                getline(ss,n_night,',');
+
+                NODE* customer = new NODE(user,stoi(person),room,stoi(n_night));
+                LL[i]->insert_node(customer) ;
+            }
         }
+        myFile.close();
     }
-    myFile.close();
-    
-    string usernames = login() ;
-    NODE *a = Booking(usernames) ;
-    LL ->insert_node(a);
 
-    delete LL ;
+
+    string usernames = login();
+    NODE *a = Booking(usernames);
+    
+    if(a->show_roomtype()=="standard")LL[0]->insert_node(a);
+    else if(a->show_roomtype()=="deluxe")LL[1]->insert_node(a);
+    else if(a->show_roomtype()=="family")LL[2]->insert_node(a);
+    
+    cout << "Thanks for booking" <<endl ;
+    
+    for(int i=0; i<3 ; i++)delete LL[i] ;
+   
     return 0;
 }
 

@@ -21,9 +21,14 @@ NODE::NODE(string a,int b,string c, int d){
 
 
 NODE::~NODE(){
+
+    string file_name ;
+    if(show_roomtype()=="standard") file_name = "NODE_in_Q_standard.csv" ;
+    else if(show_roomtype()=="deluxe") file_name = "NODE_in_Q_deluxe.csv" ;
+    else if(show_roomtype()=="family") file_name = "NODE_in_Q_family.csv" ;
     
     if(room_id==0){
-        ofstream myFile("NODE_in_Q.csv",ios::app); //w
+        ofstream myFile(file_name,ios::app); //w
         // Send data to the stream
         myFile << username <<","<< n_person <<"," << room_type <<"," << night<<endl; 
         // Close the file
@@ -32,8 +37,8 @@ NODE::~NODE(){
 
     else{
         ofstream myFile("NODE_in_hotel.csv",ios::app); //w
-        // Send data to the stream
-        myFile << username <<","<< n_person <<"," << room_type <<","<<night<<endl; 
+        // Send data to the stream username,room_type,n_person,room_id,night,food,laundry,shuttle,extrabed
+        myFile << username <<"," << room_type <<"," << n_person <<"," << room_id <<","<<night<<","<<food<<","<<laundry<<","<<shuttle<<","<<extrabed<<endl; 
         // Close the file
         myFile.close();
     }

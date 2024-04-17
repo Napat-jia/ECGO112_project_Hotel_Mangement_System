@@ -35,7 +35,14 @@ void queue::destruct_Linked_List(queue* q){
 
 queue::~queue(){
 
-    remove("NODE_in_Q.csv");
+    string file_name ;
+
+    if(head->show_roomtype()=="standard") file_name = "NODE_in_Q_standard.csv" ;
+    else if(head->show_roomtype()=="deluxe") file_name = "NODE_in_Q_deluxe.csv" ;
+    else if(head->show_roomtype()=="family") file_name = "NODE_in_Q_family.csv" ;
+
+    remove(file_name.c_str());
+
     while(head!=NULL){
 
         NODE* temp=head;
@@ -122,6 +129,20 @@ NODE* temp=q->head;
 
 list_in_hotel::~list_in_hotel(){
 
+   string file_name ;
+
+    remove("NODE_in_hotel.csv");
+
+    while(head!=NULL){
+
+        NODE* temp=head;
+        if(temp){
+            head=temp->move_next();
+            //if(size==1)tail=NULL;
+            size--;
+            delete temp;
+            }
+    }
 
 }
 
