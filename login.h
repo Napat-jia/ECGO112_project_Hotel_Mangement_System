@@ -112,7 +112,7 @@ bool check_name(string username) {
     
     for(i=0;i<username.size();i++){
        char ch = username[i];
-        if(ch == '/' || ch == '\\' || ch == ',' || ch == '.' || ch == '(' || ch == ')' || ch == '^' || ch == '*' || ch == '[' || ch == ']' || ch == '{' || ch == '}' || ch == '&' || ch == '!' || ch == '#' || ch == '%'){
+        if(ch == '/' || ch == '\\' || ch == ',' || ch == '.' || ch == '(' || ch == ')' || ch == '^' || ch == '*' || ch == '[' || ch == ']' || ch == '{' || ch == '}' || ch == '&' || ch == '!' || ch == '#' || ch == '%' || ch == ':' || ch == ';' || ch == '?'){
             return true;
         }
     }
