@@ -64,13 +64,16 @@ void Register() {
     
     while(1){
         cout << "Enter new username: ";
-        cin >> username;
+        getline(cin,username);
 
+        if(username.size() == 0){
+            cout << "Username shouldn't be empty." << endl;
+            continue;
+        }
         if (check_name(username) == true){
             cout << "Invalid username. Please try again." << endl;
             continue;
         }
-
         if(user_exist(username)){
             cout << "Username already exists. Please choose a new one." << endl;
             continue;
@@ -112,7 +115,7 @@ bool check_name(string username) {
     
     for(i=0;i<username.size();i++){
        char ch = username[i];
-        if(ch == '/' || ch == '\\' || ch == ',' || ch == '.' || ch == '(' || ch == ')' || ch == '^' || ch == '*' || ch == '[' || ch == ']' || ch == '{' || ch == '}' || ch == '&' || ch == '!' || ch == '#' || ch == '%' || ch == ':' || ch == ';' || ch == '?'){
+        if(ch == '/' || ch == '\\' || ch == ',' || ch == '.' || ch == '(' || ch == ')' || ch == '^' || ch == '*' || ch == '[' || ch == ']' || ch == '{' || ch == '}' || ch == '&' || ch == '!' || ch == '#' || ch == '%' || ch == ':' || ch == ';' || ch == '?' || ch == '<' || ch == '>' || ch == ' '){
             return true;
         }
     }
