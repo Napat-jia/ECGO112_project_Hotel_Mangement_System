@@ -1,6 +1,8 @@
 using namespace std;
 #include <iostream>
-
+#include <fstream>
+#include <sstream>
+#include <iostream> 
 
 #include"NODE.h"
 #include"Linked_List.h"
@@ -153,5 +155,42 @@ Linked_List::~Linked_List(){
 
 list_in_hotel::list_in_hotel(){
 
+    ifstream myFile("NODE_in_hotel.csv");
+    
+    if(!myFile.is_open())
+    {
+        cout<<"** Cannot open the file! **"<<endl;
+        //return false;
+    }
+    string line;
+    string username,room_type;
+    string n_person,room_id,night,food,laundry,shuttle,extrabed;
+    while(getline(myFile,line))
+    {
+        stringstream ss(line);
+        getline(ss,username,',');
+        getline(ss,room_type,',');
+        getline(ss,n_person,',');
+        getline(ss,room_id,',');
+        getline(ss,night,',');
+        getline(ss,food,',');
+        getline(ss,laundry,',');
+        getline(ss,shuttle,',');
+        getline(ss,extrabed,',');
 
+        NODE* customer_in_hotel  = new NODE(username,room_type,stoi(n_person),stoi(room_id),stoi(night),stoi(food),stoi(laundry),stoi(shuttle),stoi(extrabed));
+        insert_node(customer_in_hotel);
+    }
 }
+/*
+
+สร้างไว้ check constuctor list_in_hotel เฉยๆ
+
+void list_in_hotel::show_all(){
+    NODE* current = head;
+    while (current != nullptr) {
+        current->show_node();
+        current = current->move_next();
+    }
+}
+*/

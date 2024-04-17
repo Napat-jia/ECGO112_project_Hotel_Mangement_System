@@ -18,6 +18,18 @@ NODE::NODE(string a,int b,string c, int d){
     shuttle=0;
     extrabed = 0;
 }
+NODE::NODE(string a,string b,int c,int d,int e,int f, int g, int h, int i){
+    username = a;
+    room_type = b;
+    n_person = c;
+    room_id = d;
+    night = e;
+    food = f;
+    laundry = g;
+    shuttle = h;
+    extrabed = i;
+    next = NULL;
+}
 
 
 NODE::~NODE(){
@@ -87,4 +99,21 @@ int NODE:: show_extrabed(){
 
 void NODE::insert(NODE*& x){
      this -> next = x ;
-    }
+}
+/*
+
+สร้างไว้ check constuctor list_in_hotel เฉยๆ
+
+void NODE::show_node(){
+    cout<<"Name: "<<username<<endl;
+    cout<<"Room type: "<<room_type<<endl;
+    cout<<"Number of person: "<<n_person<<endl;
+    cout<<"Room ID: "<<room_id<<endl;
+    cout<<"Night: "<<night<<endl;
+    cout<<"Food: "<<food<<endl;
+    cout<<"Laundry: "<<laundry<<endl;
+    cout<<"Shuttle: "<<shuttle<<endl;
+    cout<<"Extra Bed: "<<extrabed<<endl;
+    cout<<"==========================="<<endl;
+}
+*/

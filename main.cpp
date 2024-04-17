@@ -78,6 +78,13 @@ int main(){
     cout << "Thanks for booking" <<endl ;
     
     for(int i=0; i<3 ; i++)delete LL[i] ;
+    
+    /*
+    ################## ใช้ลองเช็ค constuctor list_in_hotel เฉยๆ ###############
+
+    list_in_hotel* hotel_list = new list_in_hotel;
+    hotel_list->show_all();
+    */
    
     return 0;
 }

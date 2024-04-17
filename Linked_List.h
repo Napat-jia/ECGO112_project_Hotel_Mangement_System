@@ -32,7 +32,7 @@ class list_in_hotel : public Linked_List{
         NODE *tail ;
     public :
         list_in_hotel();
-       
+        void show_all();
         void insert_node(NODE* &q);
         void destruct_list_in_hotel(list_in_hotel* q);
         ~list_in_hotel() ;
