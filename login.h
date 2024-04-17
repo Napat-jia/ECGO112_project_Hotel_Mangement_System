@@ -30,7 +30,7 @@ string login(){
 
     while(attempt < 3){
     cout << "Username: ";
-    cin >> username;
+    getline(cin,username);
 
     cout << "Password: ";
     cin >> password;
