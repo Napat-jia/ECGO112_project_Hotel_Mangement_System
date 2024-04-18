@@ -47,7 +47,7 @@ NODE::~NODE(){
         myFile.close();
     }
 
-    else{
+    else if(room_id!=-1){
         ofstream myFile("NODE_in_hotel.csv",ios::app); //w
         // Send data to the stream username,room_type,n_person,room_id,night,food,laundry,shuttle,extrabed
         myFile << username <<"," << room_type <<"," << n_person <<"," << room_id <<","<<night<<","<<food<<","<<laundry<<","<<shuttle<<","<<extrabed<<endl; 
@@ -99,6 +99,14 @@ int NODE:: show_extrabed(){
 
 void NODE::insert(NODE*& x){
      this -> next = x ;
+}
+
+void NODE::set_next_NULL(){
+    this->next=NULL;
+}
+
+void NODE::set_room_id(int a){
+    room_id=a;
 }
 /*
 

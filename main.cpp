@@ -69,23 +69,25 @@ int main(){
 
 
     string usernames = login();
-    NODE *a = Booking(usernames);
+    //NODE *a = Booking(usernames);
     
-    if(a->show_roomtype()=="standard")LL[0]->insert_node(a);
+    
+    /*if(a->show_roomtype()=="standard")LL[0]->insert_node(a);
     else if(a->show_roomtype()=="deluxe")LL[1]->insert_node(a);
     else if(a->show_roomtype()=="family")LL[2]->insert_node(a);
     
-    cout << "Thanks for booking" <<endl ;
+    cout << "Thanks for booking" <<endl ;*/
     
     for(int i=0; i<3 ; i++)delete LL[i] ;
     
-    /*
-    ################## ใช้ลองเช็ค constuctor list_in_hotel เฉยๆ ###############
+    
+   // ################## ใช้ลองเช็ค constuctor list_in_hotel เฉยๆ ###############
 
     list_in_hotel* hotel_list = new list_in_hotel;
-    hotel_list->show_all();
-    */
-   
+   // hotel_list->show_all();
+    
+   hotel_list->check_out(usernames);
+   delete hotel_list;
     return 0;
 }
 

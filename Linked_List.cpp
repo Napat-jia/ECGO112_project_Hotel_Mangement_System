@@ -2,7 +2,8 @@ using namespace std;
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <iostream> 
+#include <string> 
+#include <iomanip>
 
 #include"NODE.h"
 #include"Linked_List.h"
@@ -194,3 +195,89 @@ void list_in_hotel::show_all(){
     }
 }
 */
+
+void list_in_hotel::check_out(string username){
+    NODE* temp=head;
+    int total,cash;
+    while(temp->show_username()!=username){
+        temp=temp->move_next();
+    }
+    cout<<endl<<"Username : "<<temp->show_username()<<endl;
+    cout<<"Room type : "<<temp->show_roomtype()<<"   price(per night) : "<<endl;
+    cout<<"Total night : "<<temp->show_night()<<endl<<"Price : "<<3500*temp->show_night()<<endl;
+    cout<<endl<<"Services"<<endl<<"--------------------------"<<endl;
+    cout<<"Food(120 per dish)     : "<<setw(3)<<temp->show_food()<<"     Price : "<<120*temp->show_food()<<endl;
+    cout<<"Laundry(50 per time)   : "<<setw(3)<<temp->show_laundry()<<"     Price : "<<50*temp->show_laundry()<<endl;
+    cout<<"Shuttle(100 per time)  : "<<setw(3)<<temp->show_shuttle()<<"     Price : "<<100*temp->show_shuttle()<<endl;
+    cout<<"Extra bed(250 per bed) : "<<setw(3)<<temp->show_extrabed()<<"     Price : "<<250*temp->show_extrabed()<<endl;
+    total=3500*temp->show_night()+120*temp->show_food()+50*temp->show_laundry()+100*temp->show_shuttle()+250*temp->show_extrabed();
+    cout<<"--------------------------"<<endl<<endl<<"Total price : "<<total<<endl<<endl;
+    cout<<"Please enter the amount of cash : ";
+    cin>>cash;
+    if(cash!=total){
+        while(cash<total){
+            cout<<endl<<"!!Not enough cash!!"<<endl<<"Please enter again : ";
+            cin>>cash;
+        }
+        cout<<endl<<"Change is "<<cash-total<<"."<<endl<<endl;
+        cout<<" Thank you for stay with us"<<endl;
+        cout<<"           * * *       "<<endl;
+        cout<<"       *           *   "<<endl;
+        cout<<"     *               *  "<<endl;
+        cout<<"    *     O     O     * "<<endl;
+        cout<<"    * ////       //// *   "<<endl;
+        cout<<"     *       3       *  "<<endl;
+        cout<<"       *           *     "<<endl;
+        cout<<"           * * *    "<<endl<<endl;
+    }
+    else {
+        cout<<endl<<" Thank you for stay with us"<<endl;
+        cout<<"           * * *       "<<endl;
+        cout<<"       *           *   "<<endl;
+        cout<<"     *               *  "<<endl;
+        cout<<"    *     O     O     * "<<endl;
+        cout<<"    * ////       //// *   "<<endl;
+        cout<<"     *       3       *  "<<endl;
+        cout<<"       *           *     "<<endl;
+        cout<<"           * * *    "<<endl;
+    }
+
+    //delete node
+    NODE* previousPtr; // pointer to previous node in list
+    NODE* currentPtr; // pointer to current node in list
+
+   // delete first node
+   if ( head->show_username() == username ) {
+      temp = head; 
+      head = ( head )->move_next();
+      temp->set_room_id(-1);
+      delete temp;
+   }
+
+   else if(temp->move_next()==NULL){
+    previousPtr=head;
+
+        while(previousPtr->move_next()!=temp){
+        previousPtr=previousPtr->move_next();
+        }
+
+        previousPtr->set_next_NULL();
+        temp->set_room_id(-1);
+        delete temp;
+   }
+
+   else {
+    previousPtr=head;
+
+        while(previousPtr->move_next()!=temp){
+        previousPtr=previousPtr->move_next();
+        }
+
+        NODE* a=temp->move_next();
+        previousPtr->insert(a);
+        temp->set_room_id(-1);
+        delete temp;
+
+   }
+ 
+}

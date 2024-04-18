@@ -12,6 +12,7 @@ class Linked_List{
         
         virtual void insert_node(NODE* &q)=0;
         virtual ~Linked_List();
+        
 };
 
 
@@ -35,6 +36,7 @@ class list_in_hotel : public Linked_List{
         void show_all();
         void insert_node(NODE* &q);
         void destruct_list_in_hotel(list_in_hotel* q);
+        void check_out(string username);
         ~list_in_hotel() ;
 
 };

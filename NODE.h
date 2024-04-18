@@ -27,6 +27,8 @@ class NODE{
         int show_shuttle();
         int show_extrabed();
         void insert(NODE*& );
+        void set_next_NULL();
+        void set_room_id(int);
 
 };
 
