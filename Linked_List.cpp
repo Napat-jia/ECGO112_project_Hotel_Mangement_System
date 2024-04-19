@@ -12,6 +12,18 @@ using namespace std;
 void Linked_List::insert_node(NODE*&q) {cout << "test " ;}
 bool check_username(string);
 
+bool Linked_List::check_username(string username){
+    NODE* temp;
+    temp = head;
+    while(temp != nullptr){
+        if(temp->show_username() == username){
+            return true;
+        }
+            temp = temp->move_next();
+    }
+    return false;
+}
+
 void queue::insert_node(NODE*&q){
     
     if(head == NULL) head = tail = q;
@@ -284,17 +296,7 @@ void list_in_hotel::check_out(string username){
  
 }
 
-bool list_in_hotel::check_username(string username){
-    NODE* temp;
-    temp = head;
-    while(temp != nullptr){
-        if(temp->show_username() == username){
-            return true;
-        }
-            temp = temp->move_next();
-    }
-    return false;
-}
+
 
 void list_in_hotel::init_room_in_hotel(Room room[]){
 

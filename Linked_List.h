@@ -10,7 +10,7 @@ class Linked_List{
         NODE * head ;
         int size ;
     public :
-        
+        bool check_username(string username);
         virtual void insert_node(NODE* &q)=0;
         virtual ~Linked_List();
         
@@ -38,7 +38,6 @@ class list_in_hotel : public Linked_List{
         void insert_node(NODE* &q);
         void destruct_list_in_hotel(list_in_hotel* q);
         void check_out(string username);
-        bool check_username(string username);
         void init_room_in_hotel(Room room[]);
         ~list_in_hotel() ;
         
