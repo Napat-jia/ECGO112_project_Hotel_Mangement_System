@@ -9,6 +9,7 @@ using namespace std;
 #include"Linked_List.h"
 
 void Linked_List::insert_node(NODE*&q) {cout << "test " ;}
+bool check_username(string);
 
 void queue::insert_node(NODE*&q){
     
@@ -280,4 +281,16 @@ void list_in_hotel::check_out(string username){
 
    }
  
+}
+
+bool list_in_hotel::check_username(string username){
+    NODE* temp;
+    temp = head;
+    while(temp != nullptr){
+        if(temp->show_username() == username){
+            return true;
+        }
+            temp = temp->move_next();
+    }
+    return false;
 }

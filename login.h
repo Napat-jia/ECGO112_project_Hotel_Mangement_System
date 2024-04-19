@@ -44,6 +44,8 @@ string login(){
     
     cout << "Incorrect username or password. Please try again." << endl;
     attempt++;
+    cin.clear();
+    cin.ignore();
     }
     cout << "Too many login attempt. Please try again later." << endl;
     exit(0);
