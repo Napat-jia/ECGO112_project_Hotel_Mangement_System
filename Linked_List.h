@@ -1,5 +1,6 @@
 using namespace std;
 #include"NODE.h"
+#include "room.h"
 
 #ifndef Linked_List_H
 #define Linked_List_H
@@ -38,6 +39,7 @@ class list_in_hotel : public Linked_List{
         void destruct_list_in_hotel(list_in_hotel* q);
         void check_out(string username);
         bool check_username(string username);
+        void init_room_in_hotel(Room room[]);
         ~list_in_hotel() ;
         
 

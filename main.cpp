@@ -5,31 +5,21 @@
 #include "NODE.h"
 #include "Linked_List.h"
 #include "login.h"
+#include "room.h"
 
 using namespace std;
 NODE* Booking(string username);
 bool check_user(string username);
 int main(){
-    /*
-    //ลอง check เฉยๆ ************
-    /*
-    string username;
-    cout<<"Enter username: ";
-    cin>>username;
-    
-    //username = login(); เอามาจาก login.cpp ?
-    queue Q;
-    bool exist = check_user(username);
-    if(!exist)
-    {
-        NODE *t = Booking(username);
-        Q.insert_node(t); //insert node เข้าไปใน linked list queue
 
-        //cout << "User '" << username << "' does not exists in the system." << endl;
-    }
-    //else cout << "User '" << username << "' exists in the system." << endl; 
-    */
-    
+    //set up room
+    Room room[] ={Room(1,2000,"standard"),Room(2,2000,"standard"),Room(3,2000,"standard"),
+                 Room(4,3500,"family"),Room(5,3500,"family"),Room(6,3500,"family"),
+                 Room(7,2700,"deluxe"),Room(8,2700,"deluxe"),Room(9,2700,"deluxe")} ;
+
+    list_in_hotel* hotel_list = new list_in_hotel;
+    hotel_list->init_room_in_hotel(room);
+
     Linked_List* LL[3]  ; // 1 => standard, 2 => deluxe, 3 => family
     LL[0] = new queue ;
     LL[1] = new queue ;
@@ -69,25 +59,24 @@ int main(){
 
 
     string usernames = login();
-    //NODE *a = Booking(usernames);
+    NODE *a = Booking(usernames);
     
     
-    /*if(a->show_roomtype()=="standard")LL[0]->insert_node(a);
+    if(a->show_roomtype()=="standard")LL[0]->insert_node(a);
     else if(a->show_roomtype()=="deluxe")LL[1]->insert_node(a);
     else if(a->show_roomtype()=="family")LL[2]->insert_node(a);
     
-    cout << "Thanks for booking" <<endl ;*/
+    cout << "Thanks for booking" <<endl ;
     
+    // delete all Link list
     for(int i=0; i<3 ; i++)delete LL[i] ;
+    delete hotel_list;
     
     
-   // ################## ใช้ลองเช็ค constuctor list_in_hotel เฉยๆ ###############
+    
+   //hotel_list->check_out(usernames);
 
-    list_in_hotel* hotel_list = new list_in_hotel;
-   // hotel_list->show_all();
-    
-   hotel_list->check_out(usernames);
-   delete hotel_list;
+   
     return 0;
 }
 

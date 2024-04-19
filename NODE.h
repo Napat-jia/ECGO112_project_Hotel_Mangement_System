@@ -14,7 +14,7 @@ class NODE{
         NODE(std::string a, int b,std::string c,int d);
         NODE(std::string a,std::string b,int c,int d,int e,int f, int g, int h, int i);
         //show_node(std::string);
-        //void show_node(); สร้างไว้ check constuctor list_in_hotel เฉยๆ
+        void show_node(); //สร้างไว้ check constuctor list_in_hotel เฉยๆ
         ~NODE();
         NODE* move_next();
         string show_username();

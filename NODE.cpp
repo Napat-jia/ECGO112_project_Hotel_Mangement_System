@@ -108,9 +108,9 @@ void NODE::set_next_NULL(){
 void NODE::set_room_id(int a){
     room_id=a;
 }
-/*
 
-สร้างไว้ check constuctor list_in_hotel เฉยๆ
+
+//สร้างไว้ check constuctor list_in_hotel เฉยๆ
 
 void NODE::show_node(){
     cout<<"Name: "<<username<<endl;
@@ -124,4 +124,3 @@ void NODE::show_node(){
     cout<<"Extra Bed: "<<extrabed<<endl;
     cout<<"==========================="<<endl;
 }
-*/
