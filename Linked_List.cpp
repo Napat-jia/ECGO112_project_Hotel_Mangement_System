@@ -8,9 +8,22 @@ using namespace std;
 
 #include"NODE.h"
 #include"Linked_List.h"
+#include "room.h"
 
 void Linked_List::insert_node(NODE*&q) {cout << "test " ;}
 bool check_username(string);
+
+bool Linked_List::check_username(string username){
+    NODE* temp;
+    temp = head;
+    while(temp != nullptr){
+        if(temp->show_username() == username){
+            return true;
+        }
+            temp = temp->move_next();
+    }
+    return false;
+}
 
 void queue::insert_node(NODE*&q){
     
@@ -185,9 +198,9 @@ list_in_hotel::list_in_hotel(){
         insert_node(customer_in_hotel);
     }
 }
-/*
 
-สร้างไว้ check constuctor list_in_hotel เฉยๆ
+
+//สร้างไว้ check constuctor list_in_hotel เฉยๆ
 
 void list_in_hotel::show_all(){
     NODE* current = head;
@@ -196,8 +209,9 @@ void list_in_hotel::show_all(){
         current = current->move_next();
     }
 }
-*/
-void list_in_hotel::call_service(string username) {
+
+void list_in_hotel::call_service(string username) 
+{
     NODE* temp = head;
     while (temp->show_username() != username) {
         temp = temp->move_next();
@@ -391,14 +405,16 @@ void list_in_hotel::check_out(string username){
  
 }
 
-bool list_in_hotel::check_username(string username){
-    NODE* temp;
-    temp = head;
-    while(temp != nullptr){
-        if(temp->show_username() == username){
-            return true;
-        }
-            temp = temp->move_next();
+
+
+void list_in_hotel::init_room_in_hotel(Room room[]){
+
+    int id  ;
+    NODE * temp = head ; 
+    while(temp!=NULL){
+        id  = temp->show_room_id() ; 
+        room[id-1].set_available(false);
+        temp = temp->move_next();
     }
-    return false;
+
 }
