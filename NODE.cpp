@@ -108,6 +108,19 @@ void NODE::set_next_NULL(){
 void NODE::set_room_id(int a){
     room_id=a;
 }
+
+void NODE::set_food(int Food){
+    this->food = Food;
+}
+void NODE::set_laundry(int laundry){
+    this->laundry = Laundry;
+}
+void NODE::set_shuttle(int Shuttle){
+    this->shuttle = Shuttle;
+}
+void NODE::set_extrabed(int Extrabed){
+    this->extrabed = Extrabed;
+}
 /*
 
 สร้างไว้ check constuctor list_in_hotel เฉยๆ

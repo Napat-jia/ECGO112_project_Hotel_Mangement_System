@@ -4,6 +4,7 @@ using namespace std;
 #include <sstream>
 #include <string> 
 #include <iomanip>
+#include <cstdlib>
 
 #include"NODE.h"
 #include"Linked_List.h"
@@ -196,6 +197,113 @@ void list_in_hotel::show_all(){
     }
 }
 */
+void list_in_hotel::call_service(string username) {
+    NODE* temp = head;
+    while (temp->show_username() != username) {
+        temp = temp->move_next();
+    }
+
+    cout<<"================= SERVICES MENU ================="<<endl;
+    cout<<"-------------------------------------------------"<<endl;
+    cout<<">>>>>>> Available Services <<<<<<<"<<endl;
+    cout<<"-------------------------------------------------"<<endl;
+    cout<<"1. Food Service (1)"<<endl;
+    cout<<"- Cost: 120 Baht per Dish"<<endl;
+    cout<<"----------------------------------"<<endl;
+    cout<<"2. Laundry Service (2)"<<endl;
+    cout<<"- Cost: 50 Baht per Item"<<endl;
+    cout<<"----------------------------------"<<endl;
+    cout<<"3. Shuttle Service (3)"<<endl;
+    cout<<"- Cost: 100 Baht per Ride"<<endl;
+    cout<<"----------------------------------"<<endl;
+    cout<<"4. Extra Bed (4)"<<endl;
+    cout<<"- Cost: 250 Baht per Bed"<<endl;
+    cout<<"----------------------------------"<<endl;
+    cout<<"# Enter Number '0' to Exit Menu #"<<endl;
+    cout<<"----------------------------------"<<endl;
+    cout<<"================================================="<<endl<<endl;
+
+    int select= -1;
+    while(select!=0)
+    {
+        cout<<"++++++++++++++++++++++++++++++++"<<endl;
+        cout<<">>>>>>> Current Services <<<<<<<"<<endl;
+        cout<<"++++++++++++++++++++++++++++++++"<<endl;
+        cout<<"Food Service: "<<temp->show_food()<<" dishes"<<endl;
+        cout<<"Laundry Service: "<<temp->show_laundry()<<" items"<<endl;
+        cout<<"Shuttle Service: "<<temp->show_shuttle()<<" rides"<<endl;
+        cout<<"Extra Beds: "<<temp->show_extrabed()<<" beds"<<endl;
+        cout<<"++++++++++++++++++++++++++++++++"<<endl<<endl;
+        try
+        {
+            cout<<">> Please select the service you want(0 to exit): ";
+            cin>>select;
+            if(cin.fail()){
+                cin.clear();
+			    cin.ignore(10000,'\n');
+                throw("** Invalid Input. Please Enter Again! **");
+            }
+            if(select<0 ||select>4){
+                throw("** Invalid Selection. Please Select a Number of Service from 0 to 4! **");
+            }
+            if(select == 1){
+                int quantity=0;
+                cout<<">> Enter the number of orders: ";
+                cin>>quantity;
+                if (cin.fail() || quantity <= 0){
+                    throw("** Invalid Quantity. Please Enter Again! **");
+                }
+                if(quantity > 10){
+                    throw("** Too many Orders placed! **");
+                }
+                temp->set_food(temp->show_food()+quantity);
+            }
+            else if(select == 2){
+                int quantity=0;
+                cout<<">> Enter the number of clothes/items: ";
+                cin>>quantity;
+                if (cin.fail() || quantity <= 0){
+                    throw("** Invalid Quantity. Please Enter Again! **");
+                }
+                if(quantity > 15){
+                    throw("** Too many Items to be laundered! **");
+                }
+                temp->set_laundry(temp->show_laundry()+quantity);
+            }
+            else if(select == 3){
+                int quantity=0;
+                cout<<">> Enter the number of shuttle rides you require: ";
+                cin>>quantity;
+                if (cin.fail() || quantity <= 0){
+                    throw("** Invalid Quantity. Please Enter Again! **");
+                }
+                if(quantity > 10){
+                    throw("** Too many Rides required! **");
+                }
+                temp->set_shuttle(temp->show_shuttle()+quantity);
+            }
+            else if(select == 4){
+                int quantity=0;
+                cout<<">> Enter the number of Extra Beds you require: ";
+                cin>>quantity;
+                if (cin.fail() || quantity <= 0){
+                    throw("** Invalid Quantity **");
+                }
+                if(quantity > 2){
+                    throw("** Too many Beds requsted! **");
+                }
+                temp->set_extrabed(temp->show_extrabed()+quantity);
+            }
+            cout<<"================================================="<<endl<<endl;
+        }
+        catch(const char* error){
+            cout<<error<<endl;
+        }
+    }
+
+}
+
+
 
 void list_in_hotel::check_out(string username){
     NODE* temp=head;
@@ -208,7 +316,7 @@ void list_in_hotel::check_out(string username){
     cout<<"Total night : "<<temp->show_night()<<endl<<"Price : "<<3500*temp->show_night()<<endl;
     cout<<endl<<"Services"<<endl<<"--------------------------"<<endl;
     cout<<"Food(120 per dish)     : "<<setw(3)<<temp->show_food()<<"     Price : "<<120*temp->show_food()<<endl;
-    cout<<"Laundry(50 per time)   : "<<setw(3)<<temp->show_laundry()<<"     Price : "<<50*temp->show_laundry()<<endl;
+    cout<<"Laundry(50 per item)   : "<<setw(3)<<temp->show_laundry()<<"     Price : "<<50*temp->show_laundry()<<endl;
     cout<<"Shuttle(100 per time)  : "<<setw(3)<<temp->show_shuttle()<<"     Price : "<<100*temp->show_shuttle()<<endl;
     cout<<"Extra bed(250 per bed) : "<<setw(3)<<temp->show_extrabed()<<"     Price : "<<250*temp->show_extrabed()<<endl;
     total=3500*temp->show_night()+120*temp->show_food()+50*temp->show_laundry()+100*temp->show_shuttle()+250*temp->show_extrabed();

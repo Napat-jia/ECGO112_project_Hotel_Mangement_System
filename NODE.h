@@ -29,6 +29,10 @@ class NODE{
         void insert(NODE*& );
         void set_next_NULL();
         void set_room_id(int);
+        void set_food(int);
+        void set_laundry(int);
+        void set_shuttle(int);
+        void set_extrabed(int);
 
 };
 
