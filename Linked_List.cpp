@@ -214,8 +214,10 @@ void list_in_hotel::show_all(){
 bool confirmOrder(){
     string confirm;
     cout<<"Please Confirm Your Orders (Confirm/Deny): ";
+    cin.clear();
+    cin.ignore(50,'\n') ;
     getline(cin, confirm);
-     if (confirm == "Confirm" && confirm.length() == 7 && confirm[6] == '\n') return true;
+    if (confirm == "Confirm" ) return true;
     else return false;
 }
 

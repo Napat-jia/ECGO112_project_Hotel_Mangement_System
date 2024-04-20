@@ -59,6 +59,8 @@ int main(){
 
     
     string usernames = login();
+    hotel_list->call_service(usernames) ;
+    /*
     NODE *a = Booking(usernames);
     
     
@@ -67,7 +69,8 @@ int main(){
     else if(a->show_roomtype()=="family")LL[2]->insert_node(a);
     
     cout << "Thanks for booking" <<endl ;
-    
+    */
+
     // delete all Link list
     for(int i=0; i<3 ; i++)delete LL[i] ;
     delete hotel_list;
