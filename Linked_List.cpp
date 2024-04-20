@@ -455,3 +455,21 @@ void queue::check_in(string username,Room room[],Linked_List* hotel){
     else cout<<"It's not your queue now"<<endl;
 
 }
+
+int queue::check_queue(string username){
+    NODE* temp = head;
+    int count=0;
+    if(head -> show_username() == username)
+    {
+        return 0;
+    }
+    else
+    {
+        while(temp -> show_username() != username && temp != nullptr)
+        {
+            temp = temp->move_next();
+            count++;
+        }
+        return count;
+    }
+}

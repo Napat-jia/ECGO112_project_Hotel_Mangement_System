@@ -142,14 +142,17 @@ NODE* Booking(string username) //รับ username มาจาก main หล�
     cout<<"1.Standard Room (1)"<<endl;
     cout<<" - Room Capacity : 1-2"<<endl;
     cout<<" - Price/Night : 2000 Baht"<<endl;
+    cout<<" - Queue : "<<LL[0]->check_queue(username)<<endl;
     cout<<"---------------------------"<<endl;
     cout<<"2.Family Room (2)"<<endl;
     cout<<" - Room Capacity : 2-5"<<endl;
     cout<<" - Price/Night : 3500 Baht"<<endl;
+    cout<<" - Queue : "<<LL[2]->check_queue(username)<<endl;
     cout<<"---------------------------"<<endl;
     cout<<"3.Deluxe Room (3)"<<endl;
     cout<<" - Room Capacity : 1-2"<<endl;
     cout<<" - Price/Night : 2700 Baht"<<endl;
+    cout<<" - Queue : "<<LL[1]->check_queue(username)<<endl;
     cout<<"---------------------------"<<endl;
     bool check_type = false;
     bool check_number = false;
