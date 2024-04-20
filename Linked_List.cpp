@@ -12,6 +12,7 @@ using namespace std;
 
 void Linked_List::insert_node(NODE*&q) {cout << "test " ;}
 bool check_username(string);
+bool confirmOrder();
 
 bool Linked_List::check_username(string username){
     NODE* temp;
@@ -210,6 +211,15 @@ void list_in_hotel::show_all(){
     }
 }
 
+bool confirmOrder(){
+    string confirm;
+    cout<<"Please Confirm Your Orders (Confirm/Deny): ";
+    getline(cin, confirm);
+     if (confirm == "Confirm" && confirm.length() == 7 && confirm[6] == '\n') return true;
+    else return false;
+}
+
+
 void list_in_hotel::call_service(string username) 
 {
     NODE* temp = head;
@@ -218,9 +228,9 @@ void list_in_hotel::call_service(string username)
     }
 
     cout<<"================= SERVICES MENU ================="<<endl;
-    cout<<"-------------------------------------------------"<<endl;
+    cout<<"----------------------------------"<<endl;
     cout<<">>>>>>> Available Services <<<<<<<"<<endl;
-    cout<<"-------------------------------------------------"<<endl;
+    cout<<"----------------------------------"<<endl;
     cout<<"1. Food Service (1)"<<endl;
     cout<<"- Cost: 120 Baht per Dish"<<endl;
     cout<<"----------------------------------"<<endl;
@@ -243,10 +253,10 @@ void list_in_hotel::call_service(string username)
         cout<<"++++++++++++++++++++++++++++++++"<<endl;
         cout<<">>>>>>> Current Services <<<<<<<"<<endl;
         cout<<"++++++++++++++++++++++++++++++++"<<endl;
-        cout<<"Food Service: "<<temp->show_food()<<" dishes"<<endl;
-        cout<<"Laundry Service: "<<temp->show_laundry()<<" items"<<endl;
-        cout<<"Shuttle Service: "<<temp->show_shuttle()<<" rides"<<endl;
-        cout<<"Extra Beds: "<<temp->show_extrabed()<<" beds"<<endl;
+        cout<<"Food Service: "<<temp->show_food()<<" Dishes"<<endl;
+        cout<<"Laundry Service: "<<temp->show_laundry()<<" Items"<<endl;
+        cout<<"Shuttle Service: "<<temp->show_shuttle()<<" Rides"<<endl;
+        cout<<"Extra Beds: "<<temp->show_extrabed()<<" Beds"<<endl;
         cout<<"++++++++++++++++++++++++++++++++"<<endl<<endl;
         try
         {
@@ -270,7 +280,14 @@ void list_in_hotel::call_service(string username)
                 if(quantity > 10){
                     throw("** Too many Orders placed! **");
                 }
-                temp->set_food(temp->show_food()+quantity);
+                if(confirmOrder()){
+                    temp->set_food(temp->show_food()+quantity);
+                    cout<<"Order Confirmed!"<<endl;
+                }
+                else{
+                    throw("** Your orders have been canceled! **");
+                }
+                
             }
             else if(select == 2){
                 int quantity=0;
@@ -282,7 +299,14 @@ void list_in_hotel::call_service(string username)
                 if(quantity > 15){
                     throw("** Too many Items to be laundered! **");
                 }
-                temp->set_laundry(temp->show_laundry()+quantity);
+                if(confirmOrder()){
+                    temp->set_laundry(temp->show_laundry()+quantity);
+                    cout<<"Order Confirmed!"<<endl;
+                }
+                else{
+                    throw("** Your orders have been canceled! **");
+                }
+                
             }
             else if(select == 3){
                 int quantity=0;
@@ -294,7 +318,14 @@ void list_in_hotel::call_service(string username)
                 if(quantity > 10){
                     throw("** Too many Rides required! **");
                 }
-                temp->set_shuttle(temp->show_shuttle()+quantity);
+                if(confirmOrder()){
+                    temp->set_shuttle(temp->show_shuttle()+quantity);
+                    cout<<"Order Confirmed!"<<endl;
+                }
+                else{
+                    throw("** Your orders have been canceled! **");
+                }
+                
             }
             else if(select == 4){
                 int quantity=0;
@@ -306,7 +337,13 @@ void list_in_hotel::call_service(string username)
                 if(quantity > 2){
                     throw("** Too many Beds requsted! **");
                 }
-                temp->set_extrabed(temp->show_extrabed()+quantity);
+                if(confirmOrder()){
+                    temp->set_extrabed(temp->show_extrabed()+quantity);
+                    cout<<"Order Confirmed!"<<endl;
+                }
+                else{
+                    throw("** Your orders have been canceled! **");
+                }
             }
             cout<<"================================================="<<endl<<endl;
         }
