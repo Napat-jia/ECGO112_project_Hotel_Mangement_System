@@ -35,22 +35,7 @@ void queue::insert_node(NODE*&q){
     tail = q;
     size++;
 }
-/*
-void queue::destruct_Linked_List(queue* q){
-    NODE* temp=q->head;
-    ifstream myFile("NODE_in_Q.csv");
-    myFile.remove();
-    ofstream myFile("NODE_in_Q.csv");
-    if(temp){
-        myFile << temp->show_sername() <<","<< temp->show_nperson() <<"," << temp->show_roomtype()<<","<<temp->show_night()<<endl;
-        q->head=temp->move_next();
-        if(q->size==1)q->tail=NULL;
-        q->size--;
-        free(temp);
-    }
-    myFile.close();
 
-}*/
 
 queue::~queue(){
 
@@ -62,6 +47,11 @@ queue::~queue(){
 
     remove(file_name.c_str());
 
+    if(head->show_room_id()==-1){
+        ofstream myFile(file_name); //w
+        myFile.close();
+    }
+    
     while(head!=NULL){
 
         NODE* temp=head;
@@ -126,25 +116,6 @@ void list_in_hotel::insert_node(NODE* &q){
     size++;
 }
 */
-/*
-void list_in_hotel::destruct_list_in_hotel(list_in_hotel* q){
-NODE* temp=q->head;
-    ifstream myFile("NODE_in_hotel.csv");
-    myFile.remove();
-    ofstream myFile("NODE_in_hotel.csv");
-    if(temp){
-        myFile << temp->show_sername() <<","<< temp->show_nperson() <<"," << temp->show_room_id()<<",";
-        myFile<<temp->show_roomtype()<<","<<temp->show_night()<<","<< temp->show_food() <<",";
-        myFile << temp->show_laundry() <<"," << temp->show_shuttle()<<","<<temp->show_extrabed()<<endl;
-        q->head=temp->move_next();
-        if(q->size==1)q->tail=NULL;
-        q->size--;
-        free(temp);
-    }
-    myFile.close();
-}
-*/
-
 
 list_in_hotel::~list_in_hotel(){
 
@@ -201,9 +172,7 @@ list_in_hotel::list_in_hotel(){
 }
 
 
-//สร้างไว้ check constuctor list_in_hotel เฉยๆ
-
-void list_in_hotel::show_all(){
+void Linked_List::show_all(){
     NODE* current = head;
     while (current != nullptr) {
         current->show_node();
@@ -458,26 +427,30 @@ void list_in_hotel::init_room_in_hotel(Room room[]){
 
 }
 
-void queue::check_in(string username,Room room[]){
+void queue::check_in(string username,Room room[],Linked_List* hotel){
 
     NODE* temp = head;
     int i;
+    string type =  head->show_roomtype() ;
+    NODE* empty = new NODE("",type,0,-1,0,0,0,0,0) ;
     if(head -> show_username() == username){
         for(i=0;i<9;i++)
         {
-            if(room[i].show_available() == true && room[i].show_room_type() == head->show_roomtype())
+            if(room[i].show_available() == true && room[i].show_room_type() == type)
             {
                 head->set_room_id(room[i].show_room());
                 room[i].set_available(false);
 
                 head = head->move_next();
+                if(head==NULL) queue::insert_node(empty);
                 temp -> set_next_NULL();
-                insert_node(temp);
+                hotel->insert_node(temp);
+
                 cout<<"Check-in successfully"<<endl;
                 break;
             }
-        } cout<<"No available room"<<endl;
-
+        } 
+        //cout<<"No available room"<<endl;
     }
     else cout<<"It's not your queue now"<<endl;
 

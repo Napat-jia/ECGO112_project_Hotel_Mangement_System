@@ -10,6 +10,8 @@ using namespace std ;
 
 string login(){
 
+    cin.clear();
+    cin.ignore(50,'\n');
     vector<string> data;  //vector
     string line,username,password;
     stringstream ss;
@@ -61,7 +63,9 @@ string login(){
 }
 
 void Register() {
-    
+
+    cin.clear();
+    cin.ignore(50,'\n');
     string username, password;
     
     while(1){

@@ -10,6 +10,8 @@
 using namespace std;
 NODE* Booking(string username);
 bool check_user(string username);
+void room_detailed();
+
 int main(){
 
     //set up room
@@ -17,8 +19,8 @@ int main(){
                  Room(4,3500,"family"),Room(5,3500,"family"),Room(6,3500,"family"),
                  Room(7,2700,"deluxe"),Room(8,2700,"deluxe"),Room(9,2700,"deluxe")} ;
 
-    list_in_hotel* hotel_list = new list_in_hotel;
-    hotel_list->init_room_in_hotel(room);
+    Linked_List* hotel_list = new list_in_hotel;
+    ((list_in_hotel*)(hotel_list))->init_room_in_hotel(room);
 
     Linked_List* LL[3]  ; // 1 => standard, 2 => deluxe, 3 => family
     LL[0] = new queue ;
@@ -57,19 +59,48 @@ int main(){
         myFile.close();
     }
 
-    
-    string usernames = login();
-    hotel_list->call_service(usernames) ;
-    /*
-    NODE *a = Booking(usernames);
-    
-    
-    if(a->show_roomtype()=="standard")LL[0]->insert_node(a);
-    else if(a->show_roomtype()=="deluxe")LL[1]->insert_node(a);
-    else if(a->show_roomtype()=="family")LL[2]->insert_node(a);
-    
-    cout << "Thanks for booking" <<endl ;
-    */
+    //login or register
+    string usernames = "" ;
+    int input ;
+    do{ 
+        cout << "1. for login.\n2. for register\ninput : ";
+        cin>>input ;
+        if(input == 1) usernames = login();
+        if(input == 2) Register();
+        
+    }while(input!=1);
+
+    // user in hotel
+    if(hotel_list->check_username(usernames)){
+
+        int input ;
+        cout << "1. for call service.\n2. for check out\ninput : ";
+        cin>>input ;
+        if(input == 1) ((list_in_hotel*)(hotel_list))->call_service(usernames);
+        if(input == 2) ((list_in_hotel*)(hotel_list))->check_out(usernames);
+    }
+    // user in Q
+
+    else if(LL[0]->check_username(usernames)||LL[1]->check_username(usernames)||LL[2]->check_username(usernames)){
+        
+
+    }
+    else{
+        int input ;
+        cout << "1. for booking.\n2. for check detail\ninput : ";
+        cin>>input ;
+        if(input == 1){
+            NODE *a = Booking(usernames);
+            
+            if(a->show_roomtype()=="standard")LL[0]->insert_node(a);
+            else if(a->show_roomtype()=="deluxe")LL[1]->insert_node(a);
+            else if(a->show_roomtype()=="family")LL[2]->insert_node(a);
+        }
+        if(input == 2) room_detailed();    
+    }
+
+    //((queue*)(LL[2]))->check_in(usernames,room,hotel_list);
+
 
     // delete all Link list
     for(int i=0; i<3 ; i++)delete LL[i] ;
@@ -77,7 +108,7 @@ int main(){
     
     
     
-   //hotel_list->check_out(usernames);
+   
 
    
     return 0;
@@ -231,7 +262,7 @@ void room_detailed(){
     cout<<"            FOOD/DISH      : 120 bath"<<endl;
     cout<<"            LAUNDRY/ITEM   : 50 bath"<<endl;
     cout<<"            SHUTTLE/TIME   : 100 bath"<<endl;
-    cout<<"            EXTRA BED/BED  : 250 bath"<<endl;<<endl;
+    cout<<"            EXTRA BED/BED  : 250 bath"<<endl;
     cout<<"---------------------------------------------"<<endl<<endl;
     cout<<"            ======================"<<endl;
     cout<<"            |     COMMON AREA    |"<<endl;
@@ -246,7 +277,7 @@ void room_detailed(){
     cout<<"                           : Starbucks"<<endl;
     cout<<"                           : KFC"<<endl;
     cout<<"                           : Souvenirs shop"<<endl;
-    cout<<"                           : ATM"<<endl;<<endl;
+    cout<<"                           : ATM"<<endl<<endl;
     cout<<"============================================="<<endl;
     cout<<"|      Where comfort meets hospitality      |"<<endl;
     cout<<"|    and memories find their perfect stay   |"<<endl;
