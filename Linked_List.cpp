@@ -467,7 +467,7 @@ void queue::check_in(string username,Room room[]){
         {
             if(room[i].show_available() == true)
             {
-                head->show_room_id() = room[i].show_room();
+                head->set_room_id(room[i].show_room());
                 room[i].set_available(false);
 
                 head = head->move_next();
