@@ -25,6 +25,7 @@ class queue:public Linked_List{
         
         void insert_node(NODE* &q);
         void destruct_Linked_List(queue* q);
+        void check_in(string username,Room room[]);
         ~queue() ;
 };
 

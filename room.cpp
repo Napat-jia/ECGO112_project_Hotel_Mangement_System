@@ -19,6 +19,10 @@ int Room::show_price(){
     return price ;
 } 
 
+int Room::show_room(){
+    return room_id ;
+}
+
 void Room::set_available(bool status){
     available = status ;
 }

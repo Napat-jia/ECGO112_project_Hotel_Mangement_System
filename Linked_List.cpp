@@ -457,3 +457,28 @@ void list_in_hotel::init_room_in_hotel(Room room[]){
     }
 
 }
+
+void queue::check_in(string username,Room room[]){
+
+    NODE* temp = head;
+    int i;
+    if(head -> show_username() == username){
+        for(i=0;i<9;i++)
+        {
+            if(room[i].show_available() == true)
+            {
+                head->show_room_id() = room[i].show_room();
+                room[i].set_available(false);
+
+                head = head->move_next();
+                temp -> set_next_NULL();
+                insert_node(temp);
+                cout<<"Check-in successfully"<<endl;
+                break;
+            }
+        } cout<<"No available room"<<endl;
+
+    }
+    else cout<<"It's not your queue now"<<endl;
+
+}

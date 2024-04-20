@@ -11,6 +11,7 @@ class Room{
     public :
         Room(int,int ,const string );
         int show_price();
+        int show_room();
         bool show_available() ;
         void set_available(bool) ;
 };
