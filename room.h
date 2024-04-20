@@ -12,6 +12,7 @@ class Room{
         Room(int,int ,const string );
         int show_price();
         int show_room();
+        string show_room_type();
         bool show_available() ;
         void set_available(bool) ;
 };

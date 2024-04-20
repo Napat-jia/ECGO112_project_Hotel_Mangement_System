@@ -23,6 +23,10 @@ int Room::show_room(){
     return room_id ;
 }
 
+string Room::show_room_type(){
+    return room_type;
+}
+
 void Room::set_available(bool status){
     available = status ;
 }
