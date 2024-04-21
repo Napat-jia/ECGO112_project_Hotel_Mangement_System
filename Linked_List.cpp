@@ -463,9 +463,8 @@ int queue::check_queue(string username){
     {
         return 0;
     }
-    else
-    {
-        while(temp -> show_username() != username && temp != nullptr)
+    else{
+        while(temp -> show_username() != username && temp != NULL)
         {
             temp = temp->move_next();
             count++;
