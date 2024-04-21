@@ -442,7 +442,11 @@ void queue::check_in(string username,Room room[],Linked_List* hotel){
                 room[i].set_available(false);
 
                 head = head->move_next();
-                if(head==NULL) queue::insert_node(empty);
+                if(head==NULL) 
+                {
+                    tail = NULL;
+                    queue::insert_node(empty);
+                }
                 temp -> set_next_NULL();
                 hotel->insert_node(temp);
 
