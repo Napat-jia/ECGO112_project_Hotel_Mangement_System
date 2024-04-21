@@ -100,18 +100,22 @@ void queue::check_in(string username,Room room[],Linked_List* hotel){
 int queue::check_queue(string username){
     NODE* temp = head;
     int count=0;
-    if(head -> show_username() == username)
-    {
-        return 0;
-    }
-    else{
-        while(temp -> show_username() != username && temp != NULL)
+    if(head!=NULL){
+
+        if(head -> show_username() == username)
         {
-            temp = temp->move_next();
-            count++;
+            return 0;
         }
-        return count;
-    }
+        else{
+            while(temp -> show_username() != username && temp != NULL)
+            {
+                temp = temp->move_next();
+                count++;
+                if(temp==NULL) break ;
+            }
+            return count;
+        }
+    }else return 0 ;
 }
 
 queue::~queue(){

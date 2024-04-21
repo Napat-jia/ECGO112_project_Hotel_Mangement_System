@@ -8,7 +8,7 @@
 #include "room.h"
 
 using namespace std;
-NODE* Booking(string username,Linked_List* LL[]);
+NODE* Booking(string username,Linked_List** LL);
 bool check_user(string username);
 void room_detailed();
 
@@ -130,8 +130,9 @@ int main(){
 			cin.ignore(10000,'\n');
         }
         if(input == 1){
+
             NODE *a = Booking(usernames,LL);
-            
+
             if(a->show_roomtype()=="standard")LL[0]->insert_node(a);
             else if(a->show_roomtype()=="deluxe")LL[1]->insert_node(a);
             else if(a->show_roomtype()=="family")LL[2]->insert_node(a);
@@ -173,7 +174,7 @@ bool check_user(string username)
 }
     
 
-NODE* Booking(string username,Linked_List* LL[]) //รับ username มาจาก main หลัง login?? ใช่ปะ??
+NODE* Booking(string username,Linked_List** LL) //รับ username มาจาก main หลัง login?? ใช่ปะ??
 {  
     cout<<endl<<endl;
     cout<<"~~~~~~~~~~~~~~~~~~~~~~~~~~~"<<endl;
@@ -185,12 +186,12 @@ NODE* Booking(string username,Linked_List* LL[]) //รับ username มาจ�
     cout<<"1.Standard Room (1)"<<endl;
     cout<<" - Room Capacity : 1-2"<<endl;
     cout<<" - Price/Night : 2000 Baht"<<endl;
-    cout<<" - Queue : "<< ((queue*)(LL[0]))->check_queue(username) <<endl;
+    cout<<" - Queue : " << ((queue*)(LL[0]))->check_queue(username) <<endl;
     cout<<"---------------------------"<<endl;
     cout<<"2.Family Room (2)"<<endl;
     cout<<" - Room Capacity : 2-5"<<endl;
     cout<<" - Price/Night : 3500 Baht"<<endl;
-    cout<<" - Queue : "<<((queue*)(LL[2]))->check_queue(username)<<endl;
+    cout<<" - Queue : "<< ((queue*)(LL[2]))->check_queue(username)<<endl;
     cout<<"---------------------------"<<endl;
     cout<<"3.Deluxe Room (3)"<<endl;
     cout<<" - Room Capacity : 1-2"<<endl;
