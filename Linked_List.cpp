@@ -14,6 +14,16 @@ void Linked_List::insert_node(NODE*&q) {cout << "test " ;}
 bool check_username(string);
 bool confirmOrder();
 
+bool confirmOrder(){
+    string confirm;
+    cout<<"Please Confirm Your Orders (Confirm/Deny): ";
+    cin.clear();
+    cin.ignore(50,'\n') ;
+    getline(cin, confirm);
+    if (confirm == "Confirm" ) return true;
+    else return false;
+}
+
 bool Linked_List::check_username(string username){
     NODE* temp;
     temp = head;
@@ -26,6 +36,24 @@ bool Linked_List::check_username(string username){
     return false;
 }
 
+void Linked_List::show_all(){
+    NODE* current = head;
+    while (current != nullptr) {
+        current->show_node();
+        current = current->move_next();
+    }
+}
+
+Linked_List::~Linked_List(){
+    
+}
+
+queue::queue(){
+    size = 0 ;
+    head = NULL ;
+    tail = NULL ;
+}
+
 void queue::insert_node(NODE*&q){
     
     if(head == NULL) head = tail = q;
@@ -36,6 +64,55 @@ void queue::insert_node(NODE*&q){
     size++;
 }
 
+void queue::check_in(string username,Room room[],Linked_List* hotel){
+
+    NODE* temp = head;
+    int i;
+    string type =  head->show_roomtype() ;
+    NODE* empty = new NODE("",type,0,-1,0,0,0,0,0) ;
+    if(head -> show_username() == username){
+        for(i=0;i<9;i++)
+        {
+            if(room[i].show_available() == true && room[i].show_room_type() == type)
+            {
+                head->set_room_id(room[i].show_room());
+                room[i].set_available(false);
+
+                head = head->move_next();
+                if(head==NULL) 
+                {
+                    tail = NULL;
+                    queue::insert_node(empty);
+                }
+                temp -> set_next_NULL();
+                hotel->insert_node(temp);
+
+                cout<<"Check-in successfully"<<endl;
+                break;
+            }
+        } 
+        //cout<<"No available room"<<endl;
+    }
+    else cout<<"It's not your queue now"<<endl;
+
+}
+
+int queue::check_queue(string username){
+    NODE* temp = head;
+    int count=0;
+    if(head -> show_username() == username)
+    {
+        return 0;
+    }
+    else{
+        while(temp -> show_username() != username && temp != NULL)
+        {
+            temp = temp->move_next();
+            count++;
+        }
+        return count;
+    }
+}
 
 queue::~queue(){
 
@@ -64,10 +141,34 @@ queue::~queue(){
     }
 }
 
-queue::queue(){
-    size = 0 ;
-    head = NULL ;
-    tail = NULL ;
+list_in_hotel::list_in_hotel(){
+
+    ifstream myFile("NODE_in_hotel.csv");
+    
+    if(!myFile.is_open())
+    {
+        cout<<"** Cannot open the file! **"<<endl;
+        //return false;
+    }
+    string line;
+    string username,room_type;
+    string n_person,room_id,night,food,laundry,shuttle,extrabed;
+    while(getline(myFile,line))
+    {
+        stringstream ss(line);
+        getline(ss,username,',');
+        getline(ss,room_type,',');
+        getline(ss,n_person,',');
+        getline(ss,room_id,',');
+        getline(ss,night,',');
+        getline(ss,food,',');
+        getline(ss,laundry,',');
+        getline(ss,shuttle,',');
+        getline(ss,extrabed,',');
+
+        NODE* customer_in_hotel  = new NODE(username,room_type,stoi(n_person),stoi(room_id),stoi(night),stoi(food),stoi(laundry),stoi(shuttle),stoi(extrabed));
+        insert_node(customer_in_hotel);
+    }
 }
 
 void list_in_hotel::insert_node(NODE* &q){
@@ -100,7 +201,6 @@ void list_in_hotel::insert_node(NODE* &q){
     }
 }
 
-
 /*
 void list_in_hotel::insert_node(NODE* &q){
     NODE* temp;
@@ -117,79 +217,91 @@ void list_in_hotel::insert_node(NODE* &q){
 }
 */
 
-list_in_hotel::~list_in_hotel(){
-
-   string file_name ;
-
-    remove("NODE_in_hotel.csv");
-
-    while(head!=NULL){
-
-        NODE* temp=head;
-        if(temp){
-            head=temp->move_next();
-            //if(size==1)tail=NULL;
-            size--;
-            delete temp;
-            }
+void list_in_hotel::check_out(string username){
+    NODE* temp=head;
+    int total,cash;
+    while(temp->show_username()!=username){
+        temp=temp->move_next();
+    }
+    cout<<endl<<"Username : "<<temp->show_username()<<endl;
+    cout<<"Room type : "<<temp->show_roomtype()<<"   price(per night) : "<<endl;
+    cout<<"Total night : "<<temp->show_night()<<endl<<"Price : "<<3500*temp->show_night()<<endl;
+    cout<<endl<<"Services"<<endl<<"--------------------------"<<endl;
+    cout<<"Food(120 per dish)     : "<<setw(3)<<temp->show_food()<<"     Price : "<<120*temp->show_food()<<endl;
+    cout<<"Laundry(50 per item)   : "<<setw(3)<<temp->show_laundry()<<"     Price : "<<50*temp->show_laundry()<<endl;
+    cout<<"Shuttle(100 per time)  : "<<setw(3)<<temp->show_shuttle()<<"     Price : "<<100*temp->show_shuttle()<<endl;
+    cout<<"Extra bed(250 per bed) : "<<setw(3)<<temp->show_extrabed()<<"     Price : "<<250*temp->show_extrabed()<<endl;
+    total=3500*temp->show_night()+120*temp->show_food()+50*temp->show_laundry()+100*temp->show_shuttle()+250*temp->show_extrabed();
+    cout<<"--------------------------"<<endl<<endl<<"Total price : "<<total<<endl<<endl;
+    cout<<"Please enter the amount of cash : ";
+    cin>>cash;
+    if(cash!=total){
+        while(cash<total){
+            cout<<endl<<"!!Not enough cash!!"<<endl<<"Please enter again : ";
+            cin>>cash;
+        }
+        cout<<endl<<"Change is "<<cash-total<<"."<<endl<<endl;
+        cout<<" Thank you for stay with us"<<endl;
+        cout<<"           * * *       "<<endl;
+        cout<<"       *           *   "<<endl;
+        cout<<"     *               *  "<<endl;
+        cout<<"    *     O     O     * "<<endl;
+        cout<<"    * ////       //// *   "<<endl;
+        cout<<"     *       3       *  "<<endl;
+        cout<<"       *           *     "<<endl;
+        cout<<"           * * *    "<<endl<<endl;
+    }
+    else {
+        cout<<endl<<" Thank you for stay with us"<<endl;
+        cout<<"           * * *       "<<endl;
+        cout<<"       *           *   "<<endl;
+        cout<<"     *               *  "<<endl;
+        cout<<"    *     O     O     * "<<endl;
+        cout<<"    * ////       //// *   "<<endl;
+        cout<<"     *       3       *  "<<endl;
+        cout<<"       *           *     "<<endl;
+        cout<<"           * * *    "<<endl;
     }
 
+    //delete node
+    NODE* previousPtr; // pointer to previous node in list
+    NODE* currentPtr; // pointer to current node in list
+
+   // delete first node
+   if ( head->show_username() == username ) {
+      temp = head; 
+      head = ( head )->move_next();
+      temp->set_room_id(-1);
+      delete temp;
+   }
+
+   else if(temp->move_next()==NULL){
+    previousPtr=head;
+
+        while(previousPtr->move_next()!=temp){
+        previousPtr=previousPtr->move_next();
+        }
+
+        previousPtr->set_next_NULL();
+        temp->set_room_id(-1);
+        delete temp;
+   }
+
+   else {
+    previousPtr=head;
+
+        while(previousPtr->move_next()!=temp){
+        previousPtr=previousPtr->move_next();
+        }
+
+        NODE* a=temp->move_next();
+        previousPtr->insert(a);
+        temp->set_room_id(-1);
+        delete temp;
+
+   }
+ 
 }
-
-Linked_List::~Linked_List(){
-    
-}
-
-
-list_in_hotel::list_in_hotel(){
-
-    ifstream myFile("NODE_in_hotel.csv");
-    
-    if(!myFile.is_open())
-    {
-        cout<<"** Cannot open the file! **"<<endl;
-        //return false;
-    }
-    string line;
-    string username,room_type;
-    string n_person,room_id,night,food,laundry,shuttle,extrabed;
-    while(getline(myFile,line))
-    {
-        stringstream ss(line);
-        getline(ss,username,',');
-        getline(ss,room_type,',');
-        getline(ss,n_person,',');
-        getline(ss,room_id,',');
-        getline(ss,night,',');
-        getline(ss,food,',');
-        getline(ss,laundry,',');
-        getline(ss,shuttle,',');
-        getline(ss,extrabed,',');
-
-        NODE* customer_in_hotel  = new NODE(username,room_type,stoi(n_person),stoi(room_id),stoi(night),stoi(food),stoi(laundry),stoi(shuttle),stoi(extrabed));
-        insert_node(customer_in_hotel);
-    }
-}
-
-
-void Linked_List::show_all(){
-    NODE* current = head;
-    while (current != nullptr) {
-        current->show_node();
-        current = current->move_next();
-    }
-}
-
-bool confirmOrder(){
-    string confirm;
-    cout<<"Please Confirm Your Orders (Confirm/Deny): ";
-    cin.clear();
-    cin.ignore(50,'\n') ;
-    getline(cin, confirm);
-    if (confirm == "Confirm" ) return true;
-    else return false;
-}
-
 
 void list_in_hotel::call_service(string username) 
 {
@@ -325,96 +437,6 @@ void list_in_hotel::call_service(string username)
 
 }
 
-
-
-void list_in_hotel::check_out(string username){
-    NODE* temp=head;
-    int total,cash;
-    while(temp->show_username()!=username){
-        temp=temp->move_next();
-    }
-    cout<<endl<<"Username : "<<temp->show_username()<<endl;
-    cout<<"Room type : "<<temp->show_roomtype()<<"   price(per night) : "<<endl;
-    cout<<"Total night : "<<temp->show_night()<<endl<<"Price : "<<3500*temp->show_night()<<endl;
-    cout<<endl<<"Services"<<endl<<"--------------------------"<<endl;
-    cout<<"Food(120 per dish)     : "<<setw(3)<<temp->show_food()<<"     Price : "<<120*temp->show_food()<<endl;
-    cout<<"Laundry(50 per item)   : "<<setw(3)<<temp->show_laundry()<<"     Price : "<<50*temp->show_laundry()<<endl;
-    cout<<"Shuttle(100 per time)  : "<<setw(3)<<temp->show_shuttle()<<"     Price : "<<100*temp->show_shuttle()<<endl;
-    cout<<"Extra bed(250 per bed) : "<<setw(3)<<temp->show_extrabed()<<"     Price : "<<250*temp->show_extrabed()<<endl;
-    total=3500*temp->show_night()+120*temp->show_food()+50*temp->show_laundry()+100*temp->show_shuttle()+250*temp->show_extrabed();
-    cout<<"--------------------------"<<endl<<endl<<"Total price : "<<total<<endl<<endl;
-    cout<<"Please enter the amount of cash : ";
-    cin>>cash;
-    if(cash!=total){
-        while(cash<total){
-            cout<<endl<<"!!Not enough cash!!"<<endl<<"Please enter again : ";
-            cin>>cash;
-        }
-        cout<<endl<<"Change is "<<cash-total<<"."<<endl<<endl;
-        cout<<" Thank you for stay with us"<<endl;
-        cout<<"           * * *       "<<endl;
-        cout<<"       *           *   "<<endl;
-        cout<<"     *               *  "<<endl;
-        cout<<"    *     O     O     * "<<endl;
-        cout<<"    * ////       //// *   "<<endl;
-        cout<<"     *       3       *  "<<endl;
-        cout<<"       *           *     "<<endl;
-        cout<<"           * * *    "<<endl<<endl;
-    }
-    else {
-        cout<<endl<<" Thank you for stay with us"<<endl;
-        cout<<"           * * *       "<<endl;
-        cout<<"       *           *   "<<endl;
-        cout<<"     *               *  "<<endl;
-        cout<<"    *     O     O     * "<<endl;
-        cout<<"    * ////       //// *   "<<endl;
-        cout<<"     *       3       *  "<<endl;
-        cout<<"       *           *     "<<endl;
-        cout<<"           * * *    "<<endl;
-    }
-
-    //delete node
-    NODE* previousPtr; // pointer to previous node in list
-    NODE* currentPtr; // pointer to current node in list
-
-   // delete first node
-   if ( head->show_username() == username ) {
-      temp = head; 
-      head = ( head )->move_next();
-      temp->set_room_id(-1);
-      delete temp;
-   }
-
-   else if(temp->move_next()==NULL){
-    previousPtr=head;
-
-        while(previousPtr->move_next()!=temp){
-        previousPtr=previousPtr->move_next();
-        }
-
-        previousPtr->set_next_NULL();
-        temp->set_room_id(-1);
-        delete temp;
-   }
-
-   else {
-    previousPtr=head;
-
-        while(previousPtr->move_next()!=temp){
-        previousPtr=previousPtr->move_next();
-        }
-
-        NODE* a=temp->move_next();
-        previousPtr->insert(a);
-        temp->set_room_id(-1);
-        delete temp;
-
-   }
- 
-}
-
-
-
 void list_in_hotel::init_room_in_hotel(Room room[]){
 
     int id  ;
@@ -427,52 +449,21 @@ void list_in_hotel::init_room_in_hotel(Room room[]){
 
 }
 
-void queue::check_in(string username,Room room[],Linked_List* hotel){
+list_in_hotel::~list_in_hotel(){
 
-    NODE* temp = head;
-    int i;
-    string type =  head->show_roomtype() ;
-    NODE* empty = new NODE("",type,0,-1,0,0,0,0,0) ;
-    if(head -> show_username() == username){
-        for(i=0;i<9;i++)
-        {
-            if(room[i].show_available() == true && room[i].show_room_type() == type)
-            {
-                head->set_room_id(room[i].show_room());
-                room[i].set_available(false);
+   string file_name ;
 
-                head = head->move_next();
-                if(head==NULL) 
-                {
-                    tail = NULL;
-                    queue::insert_node(empty);
-                }
-                temp -> set_next_NULL();
-                hotel->insert_node(temp);
+    remove("NODE_in_hotel.csv");
 
-                cout<<"Check-in successfully"<<endl;
-                break;
+    while(head!=NULL){
+
+        NODE* temp=head;
+        if(temp){
+            head=temp->move_next();
+            //if(size==1)tail=NULL;
+            size--;
+            delete temp;
             }
-        } 
-        //cout<<"No available room"<<endl;
     }
-    else cout<<"It's not your queue now"<<endl;
 
-}
-
-int queue::check_queue(string username){
-    NODE* temp = head;
-    int count=0;
-    if(head -> show_username() == username)
-    {
-        return 0;
-    }
-    else{
-        while(temp -> show_username() != username && temp != NULL)
-        {
-            temp = temp->move_next();
-            count++;
-        }
-        return count;
-    }
 }
