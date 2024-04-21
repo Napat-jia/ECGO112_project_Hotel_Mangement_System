@@ -31,25 +31,29 @@ string login(){
     }
 
     while(attempt < 3){
+    cout<<"---------------------------"<<endl;
+    cout<<"|        ~ LOGIN ~        |"<<endl;
+    cout<<"---------------------------"<<endl;
     cout << "Username: ";
     getline(cin,username);
 
     cout << "Password: ";
     cin >> password;
+    cout<<"---------------------------"<<endl;
 
     for(int i = 0 ;i < data.size();i += 2){ 
         if(username == data[i] && password == data[i+1]){ 
-            cout << "Login Successful" << endl;
+            cout <<endl<< ">> Login Successful! <<" << endl<<endl;
             return username;
         }          
     }
     
-    cout << "Incorrect username or password. Please try again." << endl;
+    cout << "** Incorrect username or password. Please try again! **" << endl;
     attempt++;
     cin.clear();
     cin.ignore();
     }
-    cout << "Too many login attempt. Please try again later." << endl;
+    cout << "** Too many login attempt. Please try again later! **" << endl;
     exit(0);
     /*
     
@@ -69,33 +73,36 @@ void Register() {
     string username, password;
     
     while(1){
+        cout<<"----------------------------"<<endl;
+        cout<<"|       REGISTRATION       |"<<endl;
+        cout<<"----------------------------"<<endl;
         cout << "Enter new username: ";
         getline(cin,username);
 
         if(username.size() == 0){
-            cout << "Username shouldn't be empty." << endl;
+            cout << "** Username shouldn't be empty! **" << endl;
             continue;
         }
         if (check_name(username) == true){
-            cout << "Invalid username. Please try again." << endl;
+            cout << "** Invalid username. Please try again! **" << endl;
             continue;
         }
         if(user_exist(username)){
-            cout << "Username already exists. Please choose a new one." << endl;
+            cout << "** Username already exists. Please choose a new one! **" << endl;
             continue;
         }
         else break;
     }
     cout << "Enter password    : ";
     cin >> password;
-    
+    cout<<"----------------------------"<<endl;
 
     ofstream myFile("username.csv", ios::app); // open file for appending
     if(!myFile.is_open()) {
-        cout << "Can't open file for registration" << endl;
+        cout << "** Can't open file for registration! **" << endl;
     } else {
         myFile << username << "," << password << endl;
-        cout << "Registration Successfull" << endl;
+        cout << ">> Registration Successfull! <<" << endl;
     }
     
 }

@@ -62,9 +62,22 @@ int main(){
     //login or register
     string usernames = "" ;
     int input ;
+    cout<<"==============================================="<<endl;
+    cout<<"||      -------------------------------      ||"<<endl;
+    cout<<"||   ~~ | WELCOME TO OUR HOTEL SYSTEM | ~~   ||"<<endl;
+    cout<<"||      -------------------------------      ||"<<endl;
     do{ 
-        cout << "1. for login.\n2. for register\ninput : ";
-        cin>>input ;
+        //cout << "1. for login.\n2. for register\ninput : ";
+        cout<<"==============================================="<<endl;
+        cout<<"||  >> 1. LOGIN:    (Enter '1' to Login)     ||"<<endl;
+        cout<<"||  >> 2. REGISTER: (Enter '2' to Register)  ||"<<endl;
+        cout<<"==============================================="<<endl;
+        cout<<"Please Enter your Selection: ";
+        cin>>input;
+        if(cin.fail()){
+            cin.clear();
+			cin.ignore(10000,'\n');
+        }
         if(input == 1) usernames = login();
         if(input == 2) Register();
         
@@ -74,8 +87,20 @@ int main(){
     if(hotel_list->check_username(usernames)){
 
         int input ;
-        cout << "1. for call service.\n2. for check out\ninput : ";
+        //cout << "1. for call service.\n2. for check out\ninput : ";
+        cout<<"==========================================================="<<endl;
+        cout<<"||                     ~ USER MENU ~                     ||"<<endl;
+        cout<<"==========================================================="<<endl;
+        cout<<"-----------------------------------------------------------"<<endl;
+        cout<<"||  >> 1. CALL SERVICE:   (Enter '1' to Call Service)    ||"<<endl;
+        cout<<"||  >> 2. CHECK OUT:      (Enter '2' to Check Out)       ||"<<endl;
+        cout<<"-----------------------------------------------------------"<<endl;
+        cout<<"Please Enter your Selection: ";
         cin>>input ;
+        if(cin.fail()){
+            cin.clear();
+			cin.ignore(10000,'\n');
+        }
         if(input == 1) ((list_in_hotel*)(hotel_list))->call_service(usernames);
         if(input == 2) ((list_in_hotel*)(hotel_list))->check_out(usernames);
     }
@@ -90,8 +115,20 @@ int main(){
     }
     else{
         int input ;
-        cout << "1. for booking.\n2. for check detail\ninput : ";
-        cin>>input ;
+        //cout << "1. for booking.\n2. for check detail\ninput : ";
+        cout<<"==========================================================="<<endl;
+        cout<<"||                     ~ USER MENU ~                     ||"<<endl;
+        cout<<"==========================================================="<<endl;
+        cout<<"-----------------------------------------------------------"<<endl;
+        cout<<"||  >> 1. BOOKING:        (Enter '1' to Book Room)       ||"<<endl;
+        cout<<"||  >> 2. CHECK DETAIL:   (Enter '2' to Check Detail)    ||"<<endl;
+        cout<<"-----------------------------------------------------------"<<endl;
+        cout<<"Please Enter your Selection: ";
+        cin>>input;
+        if(cin.fail()){
+            cin.clear();
+			cin.ignore(10000,'\n');
+        }
         if(input == 1){
             NODE *a = Booking(usernames,LL);
             
@@ -138,7 +175,10 @@ bool check_user(string username)
 
 NODE* Booking(string username,Linked_List* LL[]) //รับ username มาจาก main หลัง login?? ใช่ปะ??
 {  
-    cout<<"====== BOOKING MENU ======="<<endl<<endl;
+    cout<<endl<<endl;
+    cout<<"~~~~~~~~~~~~~~~~~~~~~~~~~~~"<<endl;
+    cout<<"====== BOOKING MENU ======="<<endl;
+    cout<<"~~~~~~~~~~~~~~~~~~~~~~~~~~~"<<endl;
     cout<<"---------------------------"<<endl;
     cout<<">>>>>> Type of room <<<<<<"<<endl;
     cout<<"---------------------------"<<endl;
@@ -266,8 +306,8 @@ void room_detailed(){
     cout<<"            | ADDITIONAL SERVICES |"<<endl;
     cout<<"            ======================"<<endl<<endl;
     cout<<"            FOOD/DISH      : 120 bath"<<endl;
-    cout<<"            LAUNDRY/ITEM   : 50 bath"<<endl;
-    cout<<"            SHUTTLE/TIME   : 100 bath"<<endl;
+    cout<<"            LAUNDRY/ITEM   : 50  bath"<<endl;
+    cout<<"            SHUTTLE/RIDE   : 100 bath"<<endl;
     cout<<"            EXTRA BED/BED  : 250 bath"<<endl;
     cout<<"---------------------------------------------"<<endl<<endl;
     cout<<"            ======================"<<endl;

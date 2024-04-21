@@ -5,7 +5,7 @@ using namespace std;
 #include <string> 
 #include <iomanip>
 #include <cstdlib>
-
+#include <cstring>
 #include"NODE.h"
 #include"Linked_List.h"
 #include "room.h"
@@ -310,37 +310,37 @@ void list_in_hotel::call_service(string username)
         temp = temp->move_next();
     }
 
-    cout<<"================= SERVICES MENU ================="<<endl;
-    cout<<"----------------------------------"<<endl;
-    cout<<">>>>>>> Available Services <<<<<<<"<<endl;
-    cout<<"----------------------------------"<<endl;
-    cout<<"1. Food Service (1)"<<endl;
-    cout<<"- Cost: 120 Baht per Dish"<<endl;
-    cout<<"----------------------------------"<<endl;
-    cout<<"2. Laundry Service (2)"<<endl;
-    cout<<"- Cost: 50 Baht per Item"<<endl;
-    cout<<"----------------------------------"<<endl;
-    cout<<"3. Shuttle Service (3)"<<endl;
-    cout<<"- Cost: 100 Baht per Ride"<<endl;
-    cout<<"----------------------------------"<<endl;
-    cout<<"4. Extra Bed (4)"<<endl;
-    cout<<"- Cost: 250 Baht per Bed"<<endl;
-    cout<<"----------------------------------"<<endl;
-    cout<<"# Enter Number '0' to Exit Menu #"<<endl;
-    cout<<"----------------------------------"<<endl;
+    cout<<"================= SERVICE MENU ================="<<endl;
+    cout<<"       ----------------------------------        "<<endl;
+    cout<<"       >>>>>>> Available Services <<<<<<<"<<endl;
+    cout<<"       ----------------------------------"<<endl;
+    cout<<"             1. Food Service (1)"<<endl;
+    cout<<"             - Cost: 120 Baht per Dish"<<endl;
+    cout<<"       ----------------------------------"<<endl;
+    cout<<"             2. Laundry Service (2)"<<endl;
+    cout<<"             - Cost: 50 Baht per Item"<<endl;
+    cout<<"       ----------------------------------"<<endl;
+    cout<<"             3. Shuttle Service (3)"<<endl;
+    cout<<"             - Cost: 100 Baht per Ride"<<endl;
+    cout<<"       ----------------------------------"<<endl;
+    cout<<"             4. Extra Bed (4)"<<endl;
+    cout<<"             - Cost: 250 Baht per Bed"<<endl;
+    cout<<"       ----------------------------------"<<endl;
+    cout<<"       # Enter Number '0'  to Exit Menu #"<<endl;
+    cout<<"       ----------------------------------"<<endl;
     cout<<"================================================="<<endl<<endl;
 
     int select= -1;
     while(select!=0)
     {
-        cout<<"++++++++++++++++++++++++++++++++"<<endl;
-        cout<<">>>>>>> Current Services <<<<<<<"<<endl;
-        cout<<"++++++++++++++++++++++++++++++++"<<endl;
-        cout<<"Food Service: "<<temp->show_food()<<" Dishes"<<endl;
-        cout<<"Laundry Service: "<<temp->show_laundry()<<" Items"<<endl;
-        cout<<"Shuttle Service: "<<temp->show_shuttle()<<" Rides"<<endl;
-        cout<<"Extra Beds: "<<temp->show_extrabed()<<" Beds"<<endl;
-        cout<<"++++++++++++++++++++++++++++++++"<<endl<<endl;
+        cout<<"       --------------------------------"<<endl;
+        cout<<"       >>>>>>> Current Services <<<<<<<"<<endl;
+        cout<<"       --------------------------------"<<endl;
+        cout<<"       # Food Service: "<<temp->show_food()<<" Dish"<<endl;
+        cout<<"       # Laundry Service: "<<temp->show_laundry()<<" Item"<<endl;
+        cout<<"       # Shuttle Service: "<<temp->show_shuttle()<<" Ride"<<endl;
+        cout<<"       # Extra Beds: "<<temp->show_extrabed()<<" Bed"<<endl;
+        cout<<"       --------------------------------"<<endl<<endl;
         try
         {
             cout<<">> Please select the service you want(0 to exit): ";
@@ -431,7 +431,15 @@ void list_in_hotel::call_service(string username)
             cout<<"================================================="<<endl<<endl;
         }
         catch(const char* error){
+            int i;
+            cout<<endl;
+            for(i=0; i<strlen(error); i++){
+                cout<<"-";
+            }cout<<endl;
             cout<<error<<endl;
+            for(i=0; i<strlen(error); i++){
+                cout<<"-";
+            }cout<<endl;
         }
     }
 
