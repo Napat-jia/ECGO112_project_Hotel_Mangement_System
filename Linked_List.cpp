@@ -118,6 +118,52 @@ int queue::check_queue(string username){
     }else return 0 ;
 }
 
+void queue::cancel_queue(string username){
+    NODE* temp = head;
+    NODE* current = head;
+    NODE* previous = head;
+    while((temp->show_username()) != username && temp != NULL){
+        temp = temp->move_next();
+    }
+
+    if(head == tail){
+        string myfile,type = temp->show_roomtype();
+        head = nullptr;
+        tail = nullptr;
+        if(type == "standard") myfile = "NODE_in_Q_standard.csv";
+        else if(type == "deluxe") myfile = "NODE_in_Q_deluxe.csv";
+        else if(type == "family") myfile = "NODE_in_Q_family.csv";
+        ofstream myFile(myfile); //w
+        myFile.close();
+        temp->set_room_id(-1);
+        delete temp;
+    }
+    else if(temp==head){
+        head = head->move_next();
+        temp->set_room_id(-1);
+        delete temp;
+    }
+    else if(tail == temp){
+        while(current->move_next() != temp  && current != NULL){
+            current = current->move_next();
+        }
+            current->set_next_NULL();
+            tail = current;
+            temp->set_room_id(-1);
+            delete temp;
+    }
+    else{
+        while(previous->move_next() != temp && previous != NULL){
+            previous = previous->move_next();
+        }
+        NODE* a = temp->move_next();
+        previous->insert(a);
+        temp->set_room_id(-1);
+        delete temp;
+    }
+    cout<<"Canceled successfully"<<endl;
+}
+
 queue::~queue(){
 
     string file_name ;
@@ -450,9 +496,11 @@ void list_in_hotel::init_room_in_hotel(Room room[]){
 list_in_hotel::~list_in_hotel(){
 
    string file_name ;
-    NODE* empty = new NODE("","standard",0,-1,0,0,0,0,0) ;
     remove("NODE_in_hotel.csv");
-    if(head==NULL)insert_node(empty) ;
+    if(head==NULL){
+        ofstream myFile("NODE_in_hotel.csv"); //w
+        myFile.close();
+    }
     while(head!=NULL){
 
         NODE* temp=head;

@@ -26,6 +26,7 @@ class queue:public Linked_List{
         void insert_node(NODE* &q);
         void check_in(string username,Room room[],Linked_List*hotel);
         int check_queue(string username);
+        void cancel_queue(string username);
         ~queue() ;
 };
 

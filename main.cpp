@@ -117,9 +117,20 @@ int main(){
                     if(room[i].show_available()) check = true;
                 }
             }
-            cout <<"Queue before you : "<< Q <<endl ;
-            if(check){
-                cout << "Now is your queue!.\n1. for check in.\n0. for exit"<<endl;
+            if(Q > 0){
+                cout <<"Queue before you : "<< Q <<endl ;
+                cout <<"\n1. for cancel queue.\n0. for exit."<<endl;
+                cout<<"Please Enter your Selection: ";
+                cin>>input ;
+                if(cin.fail()){
+                    cin.clear();
+                    cin.ignore(10000,'\n');
+                }
+                if(input == 0) exit(0);
+                if(input == 1)  ((queue*)(LL[0]))->cancel_queue(usernames) ;
+            }
+            else if(check){
+                cout << "Now is your queue!.\n1. for check in.\n2. for cancel queue.\n0. for exit."<<endl;
                 cout<<"Please Enter your Selection: ";
                 cin>>input ;
                 if(cin.fail()){
@@ -128,6 +139,7 @@ int main(){
                 }
                 if(input == 0) exit(0);
                 if(input == 1)  ((queue*)(LL[0]))->check_in(usernames,room,hotel_list) ;
+                if(input == 2)  ((queue*)(LL[0]))->cancel_queue(usernames) ;
                 }else cout << "Please wait. " << endl ;
         }
         else if(LL[1]->check_username(usernames)){
@@ -140,9 +152,20 @@ int main(){
                         if(room[i].show_available()) check = true;
                     }
                 }
+                if(Q > 0){
                 cout <<"Queue before you : "<< Q <<endl ;
-                if(check){
-                    cout << "Now is your queue!.\n1. for check in.\n0. for exit"<<endl;
+                cout <<"\n1. for cancel queue.\n0. for exit."<<endl;
+                cout<<"Please Enter your Selection: ";
+                cin>>input ;
+                if(cin.fail()){
+                    cin.clear();
+                    cin.ignore(10000,'\n');
+                }
+                if(input == 0) exit(0);
+                if(input == 1)  ((queue*)(LL[1]))->cancel_queue(usernames) ;
+                }
+                else if(check){
+                    cout << "Now is your queue!.\n1. for check in.\n2. for cancel queue.\n0. for exit"<<endl;
                     cout<<"Please Enter your Selection: ";
                     cin>>input ;
                     if(cin.fail()){
@@ -151,6 +174,7 @@ int main(){
                     }
                     if(input == 0) exit(0);
                     if(input == 1)  ((queue*)(LL[1]))->check_in(usernames,room,hotel_list) ;
+                    if(input == 2)  ((queue*)(LL[1]))->cancel_queue(usernames) ;
                     }else cout << "Please wait. " << endl ;
             }
 
@@ -166,8 +190,19 @@ int main(){
                         if(room[i].show_available()) check = true;
                     }
                 }
+                if(Q > 0){
                 cout <<"Queue before you : "<< Q <<endl ;
-                if(check){
+                cout <<"\n1. for cancel queue.\n0. for exit."<<endl;
+                cout<<"Please Enter your Selection: ";
+                cin>>input ;
+                if(cin.fail()){
+                    cin.clear();
+                    cin.ignore(10000,'\n');
+                }
+                if(input == 0) exit(0);
+                if(input == 1) ((queue*)(LL[2]))->cancel_queue(usernames) ;
+                }
+                else if(check){
                     cout << "Now is your queue!.\n1. for check in.\n0. for exit"<<endl;
                     cout<<"Please Enter your Selection: ";
                     cin>>input ;
@@ -177,6 +212,7 @@ int main(){
                     }
                     if(input == 0) exit(0);
                     if(input == 1) ((queue*)(LL[2]))->check_in(usernames,room,hotel_list) ;
+                    if(input == 2)  ((queue*)(LL[2]))->cancel_queue(usernames) ;
                     }else cout << "Please wait. " << endl ;
                 }
             }
