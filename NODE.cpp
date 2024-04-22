@@ -123,8 +123,6 @@ void NODE::set_extrabed(int Extrabed){
     this->extrabed = Extrabed;
 }
 
-//สร้างไว้ check constuctor list_in_hotel เฉยๆ
-
 void NODE::show_node(){
     cout<<"Name: "<<username<<endl;
     cout<<"Room type: "<<room_type<<endl;

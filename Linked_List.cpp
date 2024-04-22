@@ -121,27 +121,28 @@ int queue::check_queue(string username){
 queue::~queue(){
 
     string file_name ;
+    if(head!=NULL){
+        if(head->show_roomtype()=="standard") file_name = "NODE_in_Q_standard.csv" ;
+        else if(head->show_roomtype()=="deluxe") file_name = "NODE_in_Q_deluxe.csv" ;
+        else if(head->show_roomtype()=="family") file_name = "NODE_in_Q_family.csv" ;
 
-    if(head->show_roomtype()=="standard") file_name = "NODE_in_Q_standard.csv" ;
-    else if(head->show_roomtype()=="deluxe") file_name = "NODE_in_Q_deluxe.csv" ;
-    else if(head->show_roomtype()=="family") file_name = "NODE_in_Q_family.csv" ;
+        remove(file_name.c_str());
 
-    remove(file_name.c_str());
+        if(head->show_room_id()==-1){
+            ofstream myFile(file_name); //w
+            myFile.close();
+        }
+        
+        while(head!=NULL){
 
-    if(head->show_room_id()==-1){
-        ofstream myFile(file_name); //w
-        myFile.close();
-    }
-    
-    while(head!=NULL){
-
-        NODE* temp=head;
-        if(temp){
-            head=temp->move_next();
-            //if(size==1)tail=NULL;
-            size--;
-            delete temp;
-            }
+            NODE* temp=head;
+            if(temp){
+                head=temp->move_next();
+                //if(size==1)tail=NULL;
+                size--;
+                delete temp;
+                }
+        }
     }
 }
 
@@ -205,21 +206,6 @@ void list_in_hotel::insert_node(NODE* &q){
     }
 }
 
-/*
-void list_in_hotel::insert_node(NODE* &q){
-    NODE* temp;
-    if(head == NULL) head = q;
-    else {
-        temp = head;
-        while(temp->move_next() != NULL)
-        {
-            temp = temp->move_next();
-        }
-        //temp->move_next() = q;
-    }
-    size++;
-}
-*/
 
 void list_in_hotel::check_out(string username){
     NODE* temp=head;
@@ -464,9 +450,9 @@ void list_in_hotel::init_room_in_hotel(Room room[]){
 list_in_hotel::~list_in_hotel(){
 
    string file_name ;
-
+    NODE* empty = new NODE("","standard",0,-1,0,0,0,0,0) ;
     remove("NODE_in_hotel.csv");
-
+    if(head==NULL)insert_node(empty) ;
     while(head!=NULL){
 
         NODE* temp=head;

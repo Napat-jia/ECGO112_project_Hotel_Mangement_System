@@ -9,7 +9,6 @@
 
 using namespace std;
 NODE* Booking(string username,Linked_List** LL);
-bool check_user(string username);
 void room_detailed();
 
 int main(){
@@ -107,10 +106,80 @@ int main(){
     // user in Q
 
     else if(LL[0]->check_username(usernames)||LL[1]->check_username(usernames)||LL[2]->check_username(usernames)){
-        
-        if(LL[0]->check_username(usernames)) cout <<"Queue before you : "<< ((queue*)(LL[0]))->check_queue(usernames)<<endl ;
-        else if(LL[1]->check_username(usernames))cout <<"Queue before you : "<< ((queue*)(LL[1]))->check_queue(usernames)<<endl ;
-        else if(LL[2]->check_username(usernames))cout <<"Queue before you : "<< ((queue*)(LL[2]))->check_queue(usernames)<<endl ;
+        int Q ;
+        bool check=false ;
+        if(LL[0]->check_username(usernames)){
+            Q = ((queue*)(LL[0]))->check_queue(usernames) ;
+            
+            if(Q==0){
+                check=false ;
+                for(int i=0;i<3;i++){
+                    if(room[i].show_available()) check = true;
+                }
+            }
+            cout <<"Queue before you : "<< Q <<endl ;
+            if(check){
+                cout << "Now is your queue!.\n1. for check in.\n0. for exit"<<endl;
+                cout<<"Please Enter your Selection: ";
+                cin>>input ;
+                if(cin.fail()){
+                    cin.clear();
+                    cin.ignore(10000,'\n');
+                }
+                if(input == 0) exit(0);
+                if(input == 1)  ((queue*)(LL[0]))->check_in(usernames,room,hotel_list) ;
+                }else cout << "Please wait. " << endl ;
+        }
+        else if(LL[1]->check_username(usernames)){
+            Q = ((queue*)(LL[1]))->check_queue(usernames) ;
+            if(LL[1]->check_username(usernames)){
+                int Q = ((queue*)(LL[1]))->check_queue(usernames) ;
+                if(Q==0){
+                    check=false ;
+                    for(int i=6;i<9;i++){
+                        if(room[i].show_available()) check = true;
+                    }
+                }
+                cout <<"Queue before you : "<< Q <<endl ;
+                if(check){
+                    cout << "Now is your queue!.\n1. for check in.\n0. for exit"<<endl;
+                    cout<<"Please Enter your Selection: ";
+                    cin>>input ;
+                    if(cin.fail()){
+                        cin.clear();
+                        cin.ignore(10000,'\n');
+                    }
+                    if(input == 0) exit(0);
+                    if(input == 1)  ((queue*)(LL[1]))->check_in(usernames,room,hotel_list) ;
+                    }else cout << "Please wait. " << endl ;
+            }
+
+            }
+        else if(LL[2]->check_username(usernames)){
+
+            Q = ((queue*)(LL[2]))->check_queue(usernames) ;
+            if(LL[2]->check_username(usernames)){
+                int Q = ((queue*)(LL[2]))->check_queue(usernames) ;
+                if(Q==0){
+                    check=false ;
+                    for(int i=3;i<6;i++){
+                        if(room[i].show_available()) check = true;
+                    }
+                }
+                cout <<"Queue before you : "<< Q <<endl ;
+                if(check){
+                    cout << "Now is your queue!.\n1. for check in.\n0. for exit"<<endl;
+                    cout<<"Please Enter your Selection: ";
+                    cin>>input ;
+                    if(cin.fail()){
+                        cin.clear();
+                        cin.ignore(10000,'\n');
+                    }
+                    if(input == 0) exit(0);
+                    if(input == 1) ((queue*)(LL[2]))->check_in(usernames,room,hotel_list) ;
+                    }else cout << "Please wait. " << endl ;
+                }
+            }
 
     }
     else{
@@ -140,38 +209,16 @@ int main(){
         if(input == 2) room_detailed();    
     }
 
-    //((queue*)(LL[2]))->check_in(usernames,room,hotel_list);
 
 
     // delete all Link list
     for(int i=0; i<3 ; i++)delete LL[i] ;
     delete hotel_list;
-    
-    
-    
-   
-
-   
+       
     return 0;
 }
 
-bool check_user(string username)
-{
-    ifstream myFile("username.csv");
-    string line,csv_username;
-    if(!myFile.is_open())
-    {
-        cout<<"** Cannot open the file! **"<<endl;
-        return false;
-    }
-    while(getline(myFile,line))
-    {
-        stringstream ss(line);
-        getline(ss,csv_username,',');
-        if(username == csv_username) return true;
-    }
-    return false;
-}
+
     
 
 NODE* Booking(string username,Linked_List** LL) //รับ username มาจาก main หลัง login?? ใช่ปะ??
