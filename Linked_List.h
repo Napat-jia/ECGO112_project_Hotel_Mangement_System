@@ -38,7 +38,7 @@ class list_in_hotel : public Linked_List{
 
         list_in_hotel();
         void insert_node(NODE* &q);
-        void check_out(string username);
+        void check_out(string username,Room room[]);
         void call_service(string username);
         bool check_username(string username);
         void init_room_in_hotel(Room room[]);

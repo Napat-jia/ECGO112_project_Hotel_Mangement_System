@@ -71,37 +71,51 @@ int main(){
         cout<<"||  >> 1. LOGIN:    (Enter '1' to Login)     ||"<<endl;
         cout<<"||  >> 2. REGISTER: (Enter '2' to Register)  ||"<<endl;
         cout<<"==============================================="<<endl;
-        cout<<"Please Enter your Selection: ";
+        cout<<"Please Enter your Selection(0 to exit): ";
         cin>>input;
         if(cin.fail()){
             cin.clear();
 			cin.ignore(10000,'\n');
+            cout << "Invalid input."<<endl;
         }
-        if(input == 1) usernames = login();
-        if(input == 2) Register();
-        
+        else if(input == 1) usernames = login();
+        else if(input == 2) Register();
+        else if(input == 0)break;
+        else {
+            cin.clear();
+            cin.ignore(10000,'\n');
+            cout << "Invalid input."<<endl;
+            }
     }while(input!=1);
 
     // user in hotel
     if(hotel_list->check_username(usernames)){
 
         int input ;
-        //cout << "1. for call service.\n2. for check out\ninput : ";
         cout<<"==========================================================="<<endl;
         cout<<"||                     ~ USER MENU ~                     ||"<<endl;
         cout<<"==========================================================="<<endl;
-        cout<<"-----------------------------------------------------------"<<endl;
-        cout<<"||  >> 1. CALL SERVICE:   (Enter '1' to Call Service)    ||"<<endl;
-        cout<<"||  >> 2. CHECK OUT:      (Enter '2' to Check Out)       ||"<<endl;
-        cout<<"-----------------------------------------------------------"<<endl;
-        cout<<"Please Enter your Selection: ";
-        cin>>input ;
-        if(cin.fail()){
-            cin.clear();
-			cin.ignore(10000,'\n');
-        }
-        if(input == 1) ((list_in_hotel*)(hotel_list))->call_service(usernames);
-        if(input == 2) ((list_in_hotel*)(hotel_list))->check_out(usernames);
+        do{
+            cout<<"-----------------------------------------------------------"<<endl;
+            cout<<"||  >> 1. CALL SERVICE:   (Enter '1' to Call Service)    ||"<<endl;
+            cout<<"||  >> 2. CHECK OUT:      (Enter '2' to Check Out)       ||"<<endl;
+            cout<<"-----------------------------------------------------------"<<endl;
+            cout<<"Please Enter your Selection(0 to exit): ";
+            cin>>input ;
+            if(cin.fail()){
+                cin.clear();
+                cin.ignore(10000,'\n');
+                cout << "Invalid input."<<endl;
+            }
+            else if(input == 1) ((list_in_hotel*)(hotel_list))->call_service(usernames);
+            else if(input == 2) ((list_in_hotel*)(hotel_list))->check_out(usernames,room);
+            else if(input==0)break;
+            else {
+                cin.clear();
+                cin.ignore(10000,'\n');
+                cout << "Invalid input."<<endl;
+                }
+            }while(input!=2);
     }
     // user in Q
 
@@ -118,28 +132,44 @@ int main(){
                 }
             }
             if(Q > 0){
-                cout <<"Queue before you : "<< Q <<endl ;
-                cout <<"\n1. for cancel queue.\n0. for exit."<<endl;
-                cout<<"Please Enter your Selection: ";
-                cin>>input ;
-                if(cin.fail()){
-                    cin.clear();
-                    cin.ignore(10000,'\n');
-                }
-                if(input == 0) exit(0);
-                if(input == 1)  ((queue*)(LL[0]))->cancel_queue(usernames) ;
+                cout <<"===================\nQueue before you : "<< Q <<"\n==================="<<endl ;
+                do{
+                    cout <<"\n1. for cancel queue.\n0. for exit."<<endl;
+                    cout<<"Please Enter your Selection: ";
+                    cin>>input ;
+                    if(cin.fail()){
+                        cin.clear();
+                        cin.ignore(10000,'\n');
+                        cout << "Invalid input."<<endl;
+                    }
+                    else if(input == 0) break;
+                    else if(input == 1)  ((queue*)(LL[0]))->cancel_queue(usernames) ;
+                    else {
+                        cin.clear();
+                        cin.ignore(10000,'\n');
+                        cout << "Invalid input."<<endl;
+                    }
+                }while(input!=1) ;
             }
             else if(check){
-                cout << "Now is your queue!.\n1. for check in.\n2. for cancel queue.\n0. for exit."<<endl;
-                cout<<"Please Enter your Selection: ";
-                cin>>input ;
-                if(cin.fail()){
-                    cin.clear();
-                    cin.ignore(10000,'\n');
-                }
-                if(input == 0) exit(0);
-                if(input == 1)  ((queue*)(LL[0]))->check_in(usernames,room,hotel_list) ;
-                if(input == 2)  ((queue*)(LL[0]))->cancel_queue(usernames) ;
+                    do{
+                    cout << "Now is your queue!.\n1. for check in.\n2. for cancel queue.\n0. for exit."<<endl;
+                    cout<<"Please Enter your Selection: ";
+                    cin>>input ;
+                    if(cin.fail()){
+                        cin.clear();
+                        cin.ignore(10000,'\n');
+                        cout << "Invalid input."<<endl;
+                    }
+                    else if(input == 0) break;
+                    else if(input == 1)  ((queue*)(LL[0]))->check_in(usernames,room,hotel_list) ;
+                    else if(input == 2)  ((queue*)(LL[0]))->cancel_queue(usernames) ;
+                    else {
+                        cin.clear();
+                        cin.ignore(10000,'\n');
+                        cout << "Invalid input."<<endl;
+                        }
+                    }while(input>2||input<0);
                 }else cout << "Please wait. " << endl ;
         }
         else if(LL[1]->check_username(usernames)){
@@ -153,35 +183,51 @@ int main(){
                     }
                 }
                 if(Q > 0){
-                cout <<"Queue before you : "<< Q <<endl ;
-                cout <<"\n1. for cancel queue.\n0. for exit."<<endl;
-                cout<<"Please Enter your Selection: ";
-                cin>>input ;
-                if(cin.fail()){
-                    cin.clear();
-                    cin.ignore(10000,'\n');
-                }
-                if(input == 0) exit(0);
-                if(input == 1)  ((queue*)(LL[1]))->cancel_queue(usernames) ;
+                    cout <<"===================\nQueue before you : "<< Q <<"\n==================="<<endl ;
+                    do{
+                        cout <<"\n1. for cancel queue.\n0. for exit."<<endl;
+                        cout<<"Please Enter your Selection: ";
+                        cin>>input ;
+                        if(cin.fail()){
+                            cin.clear();
+                            cin.ignore(10000,'\n');
+                            cout << "Invalid input."<<endl;
+                        }
+                        else if(input == 0) break;
+                        else if(input == 1)  ((queue*)(LL[1]))->cancel_queue(usernames) ;
+                        else {
+                            cin.clear();
+                            cin.ignore(10000,'\n');
+                            cout << "Invalid input."<<endl;
+                            }
+                    }while(input!=1);
                 }
                 else if(check){
-                    cout << "Now is your queue!.\n1. for check in.\n2. for cancel queue.\n0. for exit"<<endl;
-                    cout<<"Please Enter your Selection: ";
-                    cin>>input ;
-                    if(cin.fail()){
-                        cin.clear();
-                        cin.ignore(10000,'\n');
-                    }
-                    if(input == 0) exit(0);
-                    if(input == 1)  ((queue*)(LL[1]))->check_in(usernames,room,hotel_list) ;
-                    if(input == 2)  ((queue*)(LL[1]))->cancel_queue(usernames) ;
+                    do{
+                        cout << "Now is your queue!.\n1. for check in.\n2. for cancel queue.\n0. for exit"<<endl;
+                        cout<<"Please Enter your Selection: ";
+                        cin>>input ;
+                        if(cin.fail()){
+                            cin.clear();
+                            cin.ignore(10000,'\n');
+                            cout << "Invalid input."<<endl;
+                        }
+                        else if(input == 0) break;
+                        else if(input == 1)  ((queue*)(LL[1]))->check_in(usernames,room,hotel_list) ;
+                        else if(input == 2)  ((queue*)(LL[1]))->cancel_queue(usernames) ;
+                        else {
+                            cin.clear();
+                            cin.ignore(10000,'\n');
+                            cout << "Invalid input."<<endl;
+                            }
+                        }while(input<0||input>2);
                     }else cout << "Please wait. " << endl ;
             }
 
             }
         else if(LL[2]->check_username(usernames)){
-
             Q = ((queue*)(LL[2]))->check_queue(usernames) ;
+
             if(LL[2]->check_username(usernames)){
                 int Q = ((queue*)(LL[2]))->check_queue(usernames) ;
                 if(Q==0){
@@ -191,58 +237,83 @@ int main(){
                     }
                 }
                 if(Q > 0){
-                cout <<"Queue before you : "<< Q <<endl ;
-                cout <<"\n1. for cancel queue.\n0. for exit."<<endl;
-                cout<<"Please Enter your Selection: ";
-                cin>>input ;
-                if(cin.fail()){
-                    cin.clear();
-                    cin.ignore(10000,'\n');
-                }
-                if(input == 0) exit(0);
-                if(input == 1) ((queue*)(LL[2]))->cancel_queue(usernames) ;
+                    cout <<"===================\nQueue before you : "<< Q <<"\n==================="<<endl ;
+                    do{
+                        cout <<"Queue before you : "<< Q <<endl ;
+                        cout <<"\n1. for cancel queue.\n0. for exit."<<endl;
+                        cout<<"Please Enter your Selection: ";
+                        cin>>input ;
+                        if(cin.fail()){
+                            cin.clear();
+                            cin.ignore(10000,'\n');
+                            cout << "Invalid input."<<endl;
+                        }
+                        else if(input == 0) break;
+                        else if(input == 1) ((queue*)(LL[2]))->cancel_queue(usernames) ;
+                        else {
+                            cin.clear();
+                            cin.ignore(10000,'\n');
+                            cout << "Invalid input."<<endl;
+                            }
+                    }while(input!=1);
                 }
                 else if(check){
-                    cout << "Now is your queue!.\n1. for check in.\n0. for exit"<<endl;
-                    cout<<"Please Enter your Selection: ";
-                    cin>>input ;
-                    if(cin.fail()){
-                        cin.clear();
-                        cin.ignore(10000,'\n');
-                    }
-                    if(input == 0) exit(0);
-                    if(input == 1) ((queue*)(LL[2]))->check_in(usernames,room,hotel_list) ;
-                    if(input == 2)  ((queue*)(LL[2]))->cancel_queue(usernames) ;
+                    do{
+                        cout << "Now is your queue!.\n1. for check in.\n2. for cancel queue.\n0. for exit"<<endl;
+                        cout<<"Please Enter your Selection: ";
+                        cin>>input ;
+                        if(cin.fail()){
+                            cin.clear();
+                            cin.ignore(10000,'\n');
+                            cout << "Invalid input."<<endl;
+                        }
+                        else if(input == 0) break;
+                        else if(input == 1) ((queue*)(LL[2]))->check_in(usernames,room,hotel_list) ;
+                        else if(input == 2)  ((queue*)(LL[2]))->cancel_queue(usernames) ;
+                        else {
+                                cin.clear();
+                                cin.ignore(10000,'\n');
+                                cout << "Invalid input."<<endl;
+                            }
+                        }while(input>2||input<0);
                     }else cout << "Please wait. " << endl ;
                 }
             }
 
     }
-    else{
+    else if(usernames!=""){
         int input ;
-        //cout << "1. for booking.\n2. for check detail\ninput : ";
         cout<<"==========================================================="<<endl;
         cout<<"||                     ~ USER MENU ~                     ||"<<endl;
         cout<<"==========================================================="<<endl;
-        cout<<"-----------------------------------------------------------"<<endl;
-        cout<<"||  >> 1. BOOKING:        (Enter '1' to Book Room)       ||"<<endl;
-        cout<<"||  >> 2. CHECK DETAIL:   (Enter '2' to Check Detail)    ||"<<endl;
-        cout<<"-----------------------------------------------------------"<<endl;
-        cout<<"Please Enter your Selection: ";
-        cin>>input;
-        if(cin.fail()){
-            cin.clear();
-			cin.ignore(10000,'\n');
-        }
-        if(input == 1){
+        do{
+            cout<<"-----------------------------------------------------------"<<endl;
+            cout<<"||  >> 1. BOOKING:        (Enter '1' to Book Room)       ||"<<endl;
+            cout<<"||  >> 2. CHECK DETAIL:   (Enter '2' to Check Detail)    ||"<<endl;
+            cout<<"-----------------------------------------------------------"<<endl;
+            cout<<"Please Enter your Selection(0 to exit): ";
+            cin>>input;
+            if(cin.fail()){
+                cin.clear();
+                cin.ignore(10000,'\n');
+                cout << "Invalid input."<<endl;
+            }
+            else if(input == 1){
 
-            NODE *a = Booking(usernames,LL);
+                NODE *a = Booking(usernames,LL);
 
-            if(a->show_roomtype()=="standard")LL[0]->insert_node(a);
-            else if(a->show_roomtype()=="deluxe")LL[1]->insert_node(a);
-            else if(a->show_roomtype()=="family")LL[2]->insert_node(a);
-        }
-        if(input == 2) room_detailed();    
+                if(a->show_roomtype()=="standard")LL[0]->insert_node(a);
+                else if(a->show_roomtype()=="deluxe")LL[1]->insert_node(a);
+                else if(a->show_roomtype()=="family")LL[2]->insert_node(a);
+            }
+            else if(input == 2) room_detailed();
+            else if(input == 0)break;
+            else {
+                cin.clear();
+                cin.ignore(10000,'\n');
+                cout << "Invalid input."<<endl;
+                }
+            }while(input!=1);    
     }
 
 

@@ -253,21 +253,21 @@ void list_in_hotel::insert_node(NODE* &q){
 }
 
 
-void list_in_hotel::check_out(string username){
+void list_in_hotel::check_out(string username,Room room[]){
     NODE* temp=head;
-    int total,cash;
+    int total,cash,id = (temp->show_room_id()) - 1;
     while(temp->show_username()!=username){
         temp=temp->move_next();
     }
     cout<<endl<<"Username : "<<temp->show_username()<<endl;
     cout<<"Room type : "<<temp->show_roomtype()<<"   price(per night) : "<<endl;
-    cout<<"Total night : "<<temp->show_night()<<endl<<"Price : "<<3500*temp->show_night()<<endl;
+    cout<<"Total night : "<<temp->show_night()<<endl<<"Price : "<<(room[id].show_price())*temp->show_night()<<endl;
     cout<<endl<<"Services"<<endl<<"--------------------------"<<endl;
     cout<<"Food(120 per dish)     : "<<setw(3)<<temp->show_food()<<"     Price : "<<120*temp->show_food()<<endl;
     cout<<"Laundry(50 per item)   : "<<setw(3)<<temp->show_laundry()<<"     Price : "<<50*temp->show_laundry()<<endl;
     cout<<"Shuttle(100 per time)  : "<<setw(3)<<temp->show_shuttle()<<"     Price : "<<100*temp->show_shuttle()<<endl;
     cout<<"Extra bed(250 per bed) : "<<setw(3)<<temp->show_extrabed()<<"     Price : "<<250*temp->show_extrabed()<<endl;
-    total=3500*temp->show_night()+120*temp->show_food()+50*temp->show_laundry()+100*temp->show_shuttle()+250*temp->show_extrabed();
+    total=(room[id].show_price())*temp->show_night()+120*temp->show_food()+50*temp->show_laundry()+100*temp->show_shuttle()+250*temp->show_extrabed();
     cout<<"--------------------------"<<endl<<endl<<"Total price : "<<total<<endl<<endl;
     cout<<"Please enter the amount of cash : ";
     cin>>cash;
