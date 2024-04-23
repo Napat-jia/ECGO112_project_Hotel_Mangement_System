@@ -6,6 +6,8 @@ using namespace std;
 #include <iomanip>
 #include <cstdlib>
 #include <cstring>
+#include <thread>
+#include <chrono>
 #include"NODE.h"
 #include"Linked_List.h"
 #include "room.h"
@@ -86,8 +88,9 @@ void queue::check_in(string username,Room room[],Linked_List* hotel){
                 }
                 temp -> set_next_NULL();
                 hotel->insert_node(temp);
-
-                cout<<"Check-in successfully"<<endl;
+                cout<<"-------------------------------------"<<endl;
+                cout<<">> Check-in successful. Thank you! <<"<<endl;
+                cout<<"-------------------------------------"<<endl;
                 break;
             }
         } 
@@ -161,7 +164,9 @@ void queue::cancel_queue(string username){
         temp->set_room_id(-1);
         delete temp;
     }
-    cout<<"Canceled successfully"<<endl;
+    cout<<"-----------------------------------------------------------------"<<endl;
+    cout<<">> Your booking has been successfully canceled from the queue! <<"<<endl;
+    cout<<"-----------------------------------------------------------------"<<endl;
 }
 
 queue::~queue(){
@@ -259,25 +264,28 @@ void list_in_hotel::check_out(string username,Room room[]){
     while(temp->show_username()!=username){
         temp=temp->move_next();
     }
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000)); //ใช้ sleep
+    system("clear");
     cout<<endl<<"Username : "<<temp->show_username()<<endl;
-    cout<<"Room type : "<<temp->show_roomtype()<<"   price(per night) : "<<endl;
+    cout<<"Room type : "<<temp->show_roomtype()<<"   price(per night) : "<<room[id].show_price()<<" Baht"<<endl;
     cout<<"Total night : "<<temp->show_night()<<endl<<"Price : "<<(room[id].show_price())*temp->show_night()<<endl;
-    cout<<endl<<"Services"<<endl<<"--------------------------"<<endl;
-    cout<<"Food(120 per dish)     : "<<setw(3)<<temp->show_food()<<"     Price : "<<120*temp->show_food()<<endl;
-    cout<<"Laundry(50 per item)   : "<<setw(3)<<temp->show_laundry()<<"     Price : "<<50*temp->show_laundry()<<endl;
-    cout<<"Shuttle(100 per time)  : "<<setw(3)<<temp->show_shuttle()<<"     Price : "<<100*temp->show_shuttle()<<endl;
-    cout<<"Extra bed(250 per bed) : "<<setw(3)<<temp->show_extrabed()<<"     Price : "<<250*temp->show_extrabed()<<endl;
+    cout<<endl<<"Services"<<endl<<"--------------------------------------------------------"<<endl;
+    cout<<"Food(120 Baht per dish)     : "<<setw(3)<<temp->show_food()<<"     Price : "<<120*temp->show_food()<<" Baht"<<endl;
+    cout<<"Laundry(50 Baht per item)   : "<<setw(3)<<temp->show_laundry()<<"     Price : "<<50*temp->show_laundry()<<" Baht"<<endl;
+    cout<<"Shuttle(100 Baht per time)  : "<<setw(3)<<temp->show_shuttle()<<"     Price : "<<100*temp->show_shuttle()<<" Baht"<<endl;
+    cout<<"Extra bed(250 Baht per bed) : "<<setw(3)<<temp->show_extrabed()<<"     Price : "<<250*temp->show_extrabed()<<" Baht"<<endl;
     total=(room[id].show_price())*temp->show_night()+120*temp->show_food()+50*temp->show_laundry()+100*temp->show_shuttle()+250*temp->show_extrabed();
-    cout<<"--------------------------"<<endl<<endl<<"Total price : "<<total<<endl<<endl;
+    cout<<"--------------------------------------------------------"<<endl<<endl;
+    cout<<"------------------------------"<<endl<<"Total price : "<<total<<" Baht"<<endl<<"------------------------------"<<endl;
     cout<<"Please enter the amount of cash : ";
     cin>>cash;
     if(cash!=total){
         while(cash<total){
-            cout<<endl<<"!!Not enough cash!!"<<endl<<"Please enter again : ";
+            cout<<endl<<"** !!Not enough cash!! **"<<endl<<endl<<"Please enter again : ";
             cin>>cash;
         }
-        cout<<endl<<"Change is "<<cash-total<<"."<<endl<<endl;
-        cout<<" Thank you for stay with us"<<endl;
+        cout<<endl<<"The Change is "<<cash-total<<"."<<endl<<endl;
+        cout<<">> Thank you for stay with us <<"<<endl;
         cout<<"           * * *       "<<endl;
         cout<<"       *           *   "<<endl;
         cout<<"     *               *  "<<endl;
@@ -288,7 +296,7 @@ void list_in_hotel::check_out(string username,Room room[]){
         cout<<"           * * *    "<<endl<<endl;
     }
     else {
-        cout<<endl<<" Thank you for stay with us"<<endl;
+        cout<<endl<<">> Thank you for stay with us <<"<<endl;
         cout<<"           * * *       "<<endl;
         cout<<"       *           *   "<<endl;
         cout<<"     *               *  "<<endl;
@@ -341,6 +349,8 @@ void list_in_hotel::check_out(string username,Room room[]){
 
 void list_in_hotel::call_service(string username) 
 {
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000)); //ใช้ sleep
+    system("clear");
     NODE* temp = head;
     while (temp->show_username() != username) {
         temp = temp->move_next();
@@ -401,7 +411,7 @@ void list_in_hotel::call_service(string username)
                 }
                 if(confirmOrder()){
                     temp->set_food(temp->show_food()+quantity);
-                    cout<<"Order Confirmed!"<<endl;
+                    cout<<endl<<"----------------"<<endl<<"Order Confirmed!"<<endl<<"----------------"<<endl;
                 }
                 else{
                     throw("** Your orders have been canceled! **");
@@ -420,7 +430,7 @@ void list_in_hotel::call_service(string username)
                 }
                 if(confirmOrder()){
                     temp->set_laundry(temp->show_laundry()+quantity);
-                    cout<<"Order Confirmed!"<<endl;
+                    cout<<"----------------------"<<endl<<">> Order Confirmed! <<"<<endl<<"----------------------"<<endl;
                 }
                 else{
                     throw("** Your orders have been canceled! **");
@@ -439,7 +449,7 @@ void list_in_hotel::call_service(string username)
                 }
                 if(confirmOrder()){
                     temp->set_shuttle(temp->show_shuttle()+quantity);
-                    cout<<"Order Confirmed!"<<endl;
+                    cout<<"----------------------"<<endl<<">> Order Confirmed! <<"<<endl<<"----------------------"<<endl;
                 }
                 else{
                     throw("** Your orders have been canceled! **");
@@ -458,7 +468,7 @@ void list_in_hotel::call_service(string username)
                 }
                 if(confirmOrder()){
                     temp->set_extrabed(temp->show_extrabed()+quantity);
-                    cout<<"Order Confirmed!"<<endl;
+                    cout<<"----------------------"<<endl<<">> Order Confirmed! <<"<<endl<<"----------------------"<<endl;
                 }
                 else{
                     throw("** Your orders have been canceled! **");

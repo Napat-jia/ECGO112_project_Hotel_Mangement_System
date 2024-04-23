@@ -2,7 +2,9 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
-
+#include <thread>
+#include <chrono>
+#include <cstdlib>
 bool user_exist(std::string);
 bool check_name(std::string);
 
@@ -42,9 +44,12 @@ string login(){
     cout<<"---------------------------"<<endl;
 
     for(int i = 0 ;i < data.size();i += 2){ 
-        if(username == data[i] && password == data[i+1]){ 
-            cout <<endl<< ">> Login Successful! <<" << endl<<endl;
+        if(username == data[i] && password == data[i+1]){
+            cout <<endl<< ">> Login Successful! <<" << endl;
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000)); //ใช้ sleep
+            system("clear");
             return username;
+            
         }          
     }
     
