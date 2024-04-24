@@ -148,7 +148,8 @@ int main(){
             }
             if(Q >= 0&&!check){
                 //cout <<"===================\nQueue before you : "<< Q <<"\n==================="<<endl ;
-                cout<<">>>>>>>>>>>> You are NOT the first of the queue! <<<<<<<<<<<<"<<endl;;
+                if (Q!=0)cout<<">>>>>>>>>>>> You are NOT the first of the queue! <<<<<<<<<<<<"<<endl;
+                else cout<<"Room is not available!!"<<endl;
                 cout<<"============================================================="<<endl;
                 cout<<">>>>>>>>>>>>>>>>> Queue Until Your Turn : "<<Q<<" <<<<<<<<<<<<<<<<<"<<endl;
                 cout<<"============================================================="<<endl;
@@ -223,7 +224,8 @@ int main(){
                 }
                 if(Q >= 0&&!check){
                     //cout <<"===================\nQueue before you : "<< Q <<"\n==================="<<endl ;
-                    cout<<">>>>>>>>>>>> You are NOT the first of the queue! <<<<<<<<<<<<"<<endl;;
+                    if (Q!=0)cout<<">>>>>>>>>>>> You are NOT the first of the queue! <<<<<<<<<<<<"<<endl;
+                    else cout<<"Room is not available!!"<<endl;
                     cout<<"============================================================="<<endl;
                     cout<<">>>>>>>>>>>>>>>>> Queue Until Your Turn : "<<Q<<" <<<<<<<<<<<<<<<<<"<<endl;
                     cout<<"============================================================="<<endl;
@@ -300,7 +302,8 @@ int main(){
                     }
                 }
                 if(Q >= 0&&!check){
-                    cout<<">>>>>>>>>>>> You are NOT the first of the queue! <<<<<<<<<<<<"<<endl;;
+                    if (Q!=0) cout<<">>>>>>>>>>>> You are NOT the first of the queue! <<<<<<<<<<<<"<<endl;
+                    else cout<<"Room is not available!!"<<endl;
                     //cout <<"=================================\nQueue before you : "<< Q <<"\n==================="<<endl ;
                     cout<<"============================================================="<<endl;
                     cout<<">>>>>>>>>>>>>>>>> Queue Until Your Turn : "<<Q<<" <<<<<<<<<<<<<<<<<"<<endl;
