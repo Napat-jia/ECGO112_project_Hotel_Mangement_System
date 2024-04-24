@@ -146,7 +146,7 @@ int main(){
                     if(room[i].show_available()) check = true;
                 }
             }
-            if(Q > 0){
+            if(Q >= 0&&!check){
                 //cout <<"===================\nQueue before you : "<< Q <<"\n==================="<<endl ;
                 cout<<">>>>>>>>>>>> You are NOT the first of the queue! <<<<<<<<<<<<"<<endl;;
                 cout<<"============================================================="<<endl;
@@ -209,7 +209,7 @@ int main(){
                         cout << "** Invalid input! **"<<endl;
                         }
                     }while(1);
-                }else cout << "** Please wait! **"<<endl;
+                }
         }
         else if(LL[1]->check_username(usernames)){
             Q = ((queue*)(LL[1]))->check_queue(usernames) ;
@@ -221,7 +221,7 @@ int main(){
                         if(room[i].show_available()) check = true;
                     }
                 }
-                if(Q > 0){
+                if(Q >= 0&&!check){
                     //cout <<"===================\nQueue before you : "<< Q <<"\n==================="<<endl ;
                     cout<<">>>>>>>>>>>> You are NOT the first of the queue! <<<<<<<<<<<<"<<endl;;
                     cout<<"============================================================="<<endl;
@@ -284,7 +284,7 @@ int main(){
                             cout << "** Invalid input! **"<<endl;
                             }
                         }while(1);
-                    }else cout << "Please wait. " << endl ;
+                    }
             }
 
             }
@@ -299,7 +299,7 @@ int main(){
                         if(room[i].show_available()) check = true;
                     }
                 }
-                if(Q > 0){
+                if(Q >= 0&&!check){
                     cout<<">>>>>>>>>>>> You are NOT the first of the queue! <<<<<<<<<<<<"<<endl;;
                     //cout <<"=================================\nQueue before you : "<< Q <<"\n==================="<<endl ;
                     cout<<"============================================================="<<endl;
@@ -364,7 +364,7 @@ int main(){
                                 cout << "** Invalid input! **"<<endl;
                             }
                         }while(1);
-                    }else cout << "Please wait. " << endl ;
+                    }
                 }
             }
 
