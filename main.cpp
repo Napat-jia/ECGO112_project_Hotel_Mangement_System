@@ -69,19 +69,25 @@ int main(){
     cout<<"||   ~~ | WELCOME TO OUR HOTEL SYSTEM | ~~   ||"<<endl;
     cout<<"||      -------------------------------      ||"<<endl;
     do{ 
+        
         //cout << "1. for login.\n2. for register\ninput : ";
         cout<<"==============================================="<<endl;
         cout<<"||  >> 1. LOGIN:    (Enter '1' to Login)     ||"<<endl;
         cout<<"||  >> 2. REGISTER: (Enter '2' to Register)  ||"<<endl;
         cout<<"==============================================="<<endl;
         cout<<"Please Enter your Selection(0 to exit): ";
-        cin>>input;
-        if(cin.fail()){
+        string line ;
+        cin >> noskipws;
+        cin >> line ;
+        if((!isdigit(line[1])&&line[1]!='\0')||isdigit(line[1])){
             cin.clear();
-			cin.ignore(10000,'\n');
+            cin.ignore(10000,'\n');
             cout << "** Invalid input! **"<<endl;
+            continue ;
         }
-        else if(input == 1) usernames = login();
+        else input = line[0] - '0' ;
+
+        if(input == 1) usernames = login();
         else if(input == 2) Register();
         else if(input == 0)break;
         else {
@@ -105,13 +111,18 @@ int main(){
             cout<<"||  >> 0. EXIT:           (Enter '0' to EXIT Program)    ||"<<endl;
             cout<<"-----------------------------------------------------------"<<endl;
             cout<<"Please Enter your Selection: ";
-            cin>>input ;
-            if(cin.fail()){
+            string line ;
+            cin >> noskipws;
+            cin >> line ;
+            if((!isdigit(line[1])&&line[1]!='\0')||isdigit(line[1])){
                 cin.clear();
                 cin.ignore(10000,'\n');
                 cout << "** Invalid input! **"<<endl;
+                continue ;
             }
-            else if(input == 1) ((list_in_hotel*)(hotel_list))->call_service(usernames);
+            else input = line[0] - '0' ;
+
+            if(input == 1) ((list_in_hotel*)(hotel_list))->call_service(usernames);
             else if(input == 2) ((list_in_hotel*)(hotel_list))->check_out(usernames,room);
             else if(input==0)break;
             else {
@@ -147,13 +158,18 @@ int main(){
                     cout<<"||   >> 0. EXIT:          (Enter '0' to Exit Program)      ||"<<endl;
                     cout<<"-------------------------------------------------------------"<<endl;
                     cout<<"Please Enter your Selection: ";
-                    cin>>input ;
-                    if(cin.fail()){
+                    string line ;
+                    cin >> noskipws;
+                    cin >> line ;
+                    if((!isdigit(line[1])&&line[1]!='\0')||isdigit(line[1])){
                         cin.clear();
                         cin.ignore(10000,'\n');
                         cout << "** Invalid input! **"<<endl;
+                        continue ;
                     }
-                    else if(input == 0) break;
+                    else input = line[0] - '0' ;
+
+                    if(input == 0) break;
                     else if(input == 1)  ((queue*)(LL[0]))->cancel_queue(usernames) ;
                     else {
                         cin.clear();
@@ -165,29 +181,35 @@ int main(){
             else if(check){
                     cout<<">>>>>>>>>>>>>> You are the first of the queue! <<<<<<<<<<<<<<"<<endl;
                     do{
-                    //cout << "Now is your queue!.\n1. for check in.\n2. for cancel queue.\n0. for exit."<<endl;
+                    
                     cout<<"-------------------------------------------------------------"<<endl;
                     cout<<"||   >> 1. CHECK IN:      (Enter '1' to Check In)          ||"<<endl;
                     cout<<"||   >> 2. CANCEL QUEUE:  (Enter '2' to Cancel Your Queue) ||"<<endl;
                     cout<<"||   >> 3. EXIT:          (Enter '0' to Exit Program)      ||"<<endl;
                     cout<<"-------------------------------------------------------------"<<endl;
                     cout<<"Please Enter your Selection: ";
-                    cin>>input ;
-                    if(cin.fail()){
+                    
+                    string line ;
+                    cin >> noskipws;
+                    cin >> line ;
+                    if((!isdigit(line[1])&&line[1]!='\0')||isdigit(line[1])){
                         cin.clear();
                         cin.ignore(10000,'\n');
                         cout << "** Invalid input! **"<<endl;
+                        continue ;
                     }
-                    else if(input == 0) break;
-                    else if(input == 1)  ((queue*)(LL[0]))->check_in(usernames,room,hotel_list) ;
-                    else if(input == 2)  ((queue*)(LL[0]))->cancel_queue(usernames) ;
+                    else input = line[0] - '0' ;
+
+                    if(input == 0) break;
+                    else if(input == 1) { ((queue*)(LL[0]))->check_in(usernames,room,hotel_list) ;break;}
+                    else if(input == 2) { ((queue*)(LL[0]))->cancel_queue(usernames) ;break;}
                     else {
                         cin.clear();
                         cin.ignore(10000,'\n');
                         cout << "** Invalid input! **"<<endl;
                         }
-                    }while(input>2||input<0);
-                }else cout << "** Invalid input! **"<<endl;
+                    }while(1);
+                }else cout << "** Please wait! **"<<endl;
         }
         else if(LL[1]->check_username(usernames)){
             Q = ((queue*)(LL[1]))->check_queue(usernames) ;
@@ -212,13 +234,18 @@ int main(){
                         cout<<"||   >> 0. EXIT:          (Enter '0' to Exit Program)      ||"<<endl;
                         cout<<"-------------------------------------------------------------"<<endl;
                         cout<<"Please Enter your Selection: ";
-                        cin>>input ;
-                        if(cin.fail()){
+                        string line ;
+                        cin >> noskipws;
+                        cin >> line ;
+                        if((!isdigit(line[1])&&line[1]!='\0')||isdigit(line[1])){
                             cin.clear();
                             cin.ignore(10000,'\n');
                             cout << "** Invalid input! **"<<endl;
+                            continue ;
                         }
-                        else if(input == 0) break;
+                        else input = line[0] - '0' ;
+
+                        if(input == 0) break;
                         else if(input == 1)  ((queue*)(LL[1]))->cancel_queue(usernames) ;
                         else {
                             cin.clear();
@@ -237,21 +264,26 @@ int main(){
                         cout<<"||   >> 3. EXIT:          (Enter '0' to Exit Program)      ||"<<endl;
                         cout<<"-------------------------------------------------------------"<<endl;
                         cout<<"Please Enter your Selection: ";
-                        cin>>input ;
-                        if(cin.fail()){
+                        string line ;
+                        cin >> noskipws;
+                        cin >> line ;
+                        if((!isdigit(line[1])&&line[1]!='\0')||isdigit(line[1])){
                             cin.clear();
                             cin.ignore(10000,'\n');
                             cout << "** Invalid input! **"<<endl;
+                            continue ;
                         }
-                        else if(input == 0) break;
-                        else if(input == 1)  ((queue*)(LL[1]))->check_in(usernames,room,hotel_list) ;
-                        else if(input == 2)  ((queue*)(LL[1]))->cancel_queue(usernames) ;
+                        else input = line[0] - '0' ;
+                        
+                        if(input == 0) break;
+                        else if(input == 1) { ((queue*)(LL[1]))->check_in(usernames,room,hotel_list) ;break;}
+                        else if(input == 2) { ((queue*)(LL[1]))->cancel_queue(usernames) ;break;}
                         else {
                             cin.clear();
                             cin.ignore(10000,'\n');
                             cout << "** Invalid input! **"<<endl;
                             }
-                        }while(input<0||input>2);
+                        }while(1);
                     }else cout << "Please wait. " << endl ;
             }
 
@@ -282,13 +314,18 @@ int main(){
                         cout<<"||   >> 0. EXIT:          (Enter '0' to Exit Program)      ||"<<endl;
                         cout<<"-------------------------------------------------------------"<<endl;
                         cout<<"Please Enter your Selection: ";
-                        cin>>input ;
-                        if(cin.fail()){
+                        string line ;
+                        cin >> noskipws;
+                        cin >> line ;
+                        if((!isdigit(line[1])&&line[1]!='\0')||isdigit(line[1])){
                             cin.clear();
                             cin.ignore(10000,'\n');
                             cout << "** Invalid input! **"<<endl;
+                            continue ;
                         }
-                        else if(input == 0) break;
+                        else input = line[0] - '0' ;
+
+                        if(input == 0) break;
                         else if(input == 1) ((queue*)(LL[2]))->cancel_queue(usernames) ;
                         else {
                             cin.clear();
@@ -307,21 +344,26 @@ int main(){
                         cout<<"||   >> 0. EXIT:          (Enter '0' to Exit Program)      ||"<<endl;
                         cout<<"-------------------------------------------------------------"<<endl;
                         cout<<"Please Enter your Selection: ";
-                        cin>>input ;
-                        if(cin.fail()){
+                        string line ;
+                        cin >> noskipws;
+                        cin >> line ;
+                        if((!isdigit(line[1])&&line[1]!='\0')||isdigit(line[1])){
                             cin.clear();
                             cin.ignore(10000,'\n');
                             cout << "** Invalid input! **"<<endl;
+                            continue ;
                         }
-                        else if(input == 0) break;
-                        else if(input == 1) ((queue*)(LL[2]))->check_in(usernames,room,hotel_list) ;
-                        else if(input == 2)  ((queue*)(LL[2]))->cancel_queue(usernames) ;
+                        else input = line[0] - '0' ;
+
+                        if(input == 0) break;
+                        else if(input == 1) {((queue*)(LL[2]))->check_in(usernames,room,hotel_list) ;break;}
+                        else if(input == 2)  {((queue*)(LL[2]))->cancel_queue(usernames) ;break;}
                         else {
                                 cin.clear();
                                 cin.ignore(10000,'\n');
                                 cout << "** Invalid input! **"<<endl;
                             }
-                        }while(input>2||input<0);
+                        }while(1);
                     }else cout << "Please wait. " << endl ;
                 }
             }
@@ -339,16 +381,18 @@ int main(){
             cout<<"||  >> 0. EXIT:          (Enter '0' to Exit Program)     ||"<<endl;
             cout<<"-----------------------------------------------------------"<<endl;
             cout<<"Please Enter your Selection: ";
-            cin>>input;
-            if(cin.fail()){
+            string line ;
+            cin >> noskipws;
+            cin >> line ;
+            if((!isdigit(line[1])&&line[1]!='\0')||isdigit(line[1])){
                 cin.clear();
                 cin.ignore(10000,'\n');
                 cout << "** Invalid input! **"<<endl;
+                continue ;
             }
-            else if(input == 1){
-
+            else input = line[0] - '0' ;
+            if(input == 1){
                 NODE *a = Booking(usernames,LL);
-
                 if(a->show_roomtype()=="standard")LL[0]->insert_node(a);
                 else if(a->show_roomtype()=="deluxe")LL[1]->insert_node(a);
                 else if(a->show_roomtype()=="family")LL[2]->insert_node(a);
@@ -379,6 +423,8 @@ NODE* Booking(string username,Linked_List** LL)
 {  
     std::this_thread::sleep_for(std::chrono::milliseconds(1000)); //ใช้ sleep
     system("clear");
+    cin.clear();
+    cin.ignore(10000,'\n');
     cout<<endl<<endl;
     cout<<"~~~~~~~~~~~~~~~~~~~~~~~~~~~"<<endl;
     cout<<"====== BOOKING MENU ======="<<endl;
@@ -406,23 +452,43 @@ NODE* Booking(string username,Linked_List** LL)
     int n=0,type=0,night=0;
     string room;
     while(!check_number)
-    {
-        cout<<"Please enter number of people: ";
-        cin>>n;
+    {   
+        cout<<"Please enter number of people(1-5 people): ";
+        string line ;
+        cin >> noskipws;
+        cin >> line ;
+        if((!isdigit(line[1])&&line[1]!='\0')||isdigit(line[1])){
+            cin.clear();
+            cin.ignore(10000,'\n');
+            cout << "** Invalid input!**"<<endl;
+            continue ;
+        }
+        else n = line[0] - '0' ;
+
         if(n>0 && n<=5) 
         {
             check_number = true;
             cin.clear();
             cin.ignore(10000,'\n');
         }
-        else cout<<"** Invalid number of people! **"<<endl;
+        else cout<<"** Invalid input! **"<<endl;
 
     }
     while(!check_type)
     {
         cout<<"---------------------------"<<endl;
         cout<<"Select type of room you want to book in (1-3): ";
-        cin>>type;
+        string line ;
+        cin >> noskipws;
+        cin >> line ;
+        if((!isdigit(line[1])&&line[1]!='\0')||isdigit(line[1])){
+            cin.clear();
+            cin.ignore(10000,'\n');
+            cout << "** Invalid input! **"<<endl;
+            continue ;
+        }
+        else type = line[0] - '0' ;
+        
         if(type == 1){
             room = "standard";
             if(n>2)
@@ -457,8 +523,26 @@ NODE* Booking(string username,Linked_List** LL)
         }
     }
     cout<<"---------------------------"<<endl;
-    cout<<"Please enter the number of nights you plan to stay: ";
-    cin>>night;
+    int loop = 1 ;
+    while(loop){
+
+        cin.clear();
+        cin.ignore(10000,'\n');
+        cout<<"Please enter the number of nights you plan to stay: ";
+        cin>>night;
+
+        if(cin.fail()){
+            cin.clear();
+            cin.ignore(10000,'\n');
+            cout<<"** Invalid Input Please Select Again! **"<<endl;
+        }
+        else if(night<0){
+            cin.clear();
+            cin.ignore(10000,'\n');
+            cout<<"** Invalid Input Please Select Again! **"<<endl;
+        }else loop = 0 ;
+    }
+    
     NODE* t = new NODE(username,n,room,night);
     cout<<endl<<"-------------------------------------------------------------------------"<<endl;
     cout<<">> You have been added to the queue. Please wait until it's your turn. <<"<<endl;
@@ -544,5 +628,7 @@ void room_detailed(){
     cout<<"|    and memories find their perfect stay   |"<<endl;
     cout<<"|          - until we meet again -          |"<<endl;
     cout<<"============================================="<<endl;
+    cin.clear();
+    cin.ignore(10000,'\n');
 }
 

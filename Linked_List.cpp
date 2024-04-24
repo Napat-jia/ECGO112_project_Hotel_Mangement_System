@@ -17,13 +17,17 @@ bool check_username(string);
 bool confirmOrder();
 
 bool confirmOrder(){
+    do{
     string confirm;
     cout<<"Please Confirm Your Orders (Confirm/Deny): ";
     cin.clear();
-    cin.ignore(50,'\n') ;
-    getline(cin, confirm);
-    if (confirm == "Confirm" ) return true;
-    else return false;
+    cin.ignore(500,'\n') ;
+    cin >> confirm ;
+    if (confirm == "Confirm" ) {cin.clear();cin.ignore(500,'\n') ;return true;}
+    else if(confirm == "Deny"){cin.clear();cin.ignore(500,'\n') ;return false;}
+    else cout <<  " Invalid input!! " << endl ;
+        
+    }while(1);
 }
 
 bool Linked_List::check_username(string username){
@@ -277,35 +281,36 @@ void list_in_hotel::check_out(string username,Room room[]){
     total=(room[id].show_price())*temp->show_night()+120*temp->show_food()+50*temp->show_laundry()+100*temp->show_shuttle()+250*temp->show_extrabed();
     cout<<"--------------------------------------------------------"<<endl<<endl;
     cout<<"------------------------------"<<endl<<"Total price : "<<total<<" Baht"<<endl<<"------------------------------"<<endl;
+    cin.clear();
+    cin.ignore(100,'\n');
+    do{
     cout<<"Please enter the amount of cash : ";
-    cin>>cash;
-    if(cash!=total){
-        while(cash<total){
-            cout<<endl<<"** !!Not enough cash!! **"<<endl<<endl<<"Please enter again : ";
-            cin>>cash;
-        }
-        cout<<endl<<"The Change is "<<cash-total<<"."<<endl<<endl;
-        cout<<">> Thank you for stay with us <<"<<endl;
-        cout<<"           * * *       "<<endl;
-        cout<<"       *           *   "<<endl;
-        cout<<"     *               *  "<<endl;
-        cout<<"    *     O     O     * "<<endl;
-        cout<<"    * ////       //// *   "<<endl;
-        cout<<"     *       3       *  "<<endl;
-        cout<<"       *           *     "<<endl;
-        cout<<"           * * *    "<<endl<<endl;
+    string line ;
+    bool flag = true;
+    cin >> noskipws;
+    cin >> line ;
+    for(int i = 0 ; i < line.length();i++){
+        if(!isdigit(line[i]))flag = false ;
     }
-    else {
-        cout<<endl<<">> Thank you for stay with us <<"<<endl;
-        cout<<"           * * *       "<<endl;
-        cout<<"       *           *   "<<endl;
-        cout<<"     *               *  "<<endl;
-        cout<<"    *     O     O     * "<<endl;
-        cout<<"    * ////       //// *   "<<endl;
-        cout<<"     *       3       *  "<<endl;
-        cout<<"       *           *     "<<endl;
-        cout<<"           * * *    "<<endl;
-    }
+    if(!flag) {cout<<"** Invalid input!! **"<<endl;cin.clear();cin.ignore(100,'\n') ;continue;}
+    else cash = atoi(line.c_str()) ;
+
+    if(cash<total) cout<<"** !!Not enough cash!! **"<<endl;
+    else if(cash>=total)break;
+    cin.clear();
+    cin.ignore(100,'\n') ;
+    }while(1);
+
+    cout<<endl<<"The Change is "<<cash-total<<"."<<endl<<endl;
+    cout<<">> Thank you for stay with us <<"<<endl;
+    cout<<"           * * *       "<<endl;
+    cout<<"       *           *   "<<endl;
+    cout<<"     *               *  "<<endl;
+    cout<<"    *     O     O     * "<<endl;
+    cout<<"    * ////       //// *   "<<endl;
+    cout<<"     *       3       *  "<<endl;
+    cout<<"       *           *     "<<endl;
+    cout<<"           * * *    "<<endl<<endl;
 
     //delete node
     NODE* previousPtr; // pointer to previous node in list
@@ -375,34 +380,52 @@ void list_in_hotel::call_service(string username)
     cout<<"       # Enter Number '0'  to Exit Menu #"<<endl;
     cout<<"       ----------------------------------"<<endl;
     cout<<"================================================="<<endl<<endl;
-
+    cin.clear();
+    cin.ignore(10000,'\n');
     int select= -1;
     while(select!=0)
-    {
+    {   
         cout<<"       --------------------------------"<<endl;
         cout<<"       >>>>>>> Current Services <<<<<<<"<<endl;
         cout<<"       --------------------------------"<<endl;
-        cout<<"       # Food Service: "<<temp->show_food()<<" Dish"<<endl;
-        cout<<"       # Laundry Service: "<<temp->show_laundry()<<" Item"<<endl;
-        cout<<"       # Shuttle Service: "<<temp->show_shuttle()<<" Ride"<<endl;
-        cout<<"       # Extra Beds: "<<temp->show_extrabed()<<" Bed"<<endl;
+        cout<<"       # (1) Food Service: "<<temp->show_food()<<" Dish"<<endl;
+        cout<<"       # (2) Laundry Service: "<<temp->show_laundry()<<" Item"<<endl;
+        cout<<"       # (3) Shuttle Service: "<<temp->show_shuttle()<<" Ride"<<endl;
+        cout<<"       # (4) Extra Beds: "<<temp->show_extrabed()<<" Bed"<<endl;
         cout<<"       --------------------------------"<<endl<<endl;
         try
         {
             cout<<">> Please select the service you want(0 to exit): ";
-            cin>>select;
-            if(cin.fail()){
+            string line ;
+            cin >> noskipws;
+            cin >> line ;
+            if((!isdigit(line[1])&&line[1]!='\0')||isdigit(line[1])){
                 cin.clear();
-			    cin.ignore(10000,'\n');
-                throw("** Invalid Input. Please Enter Again! **");
+                cin.ignore(10000,'\n');
+                throw ("** Invalid input! **");
+                continue ;
             }
+            else {select = line[0] - '0' ;
+                cin.clear();
+                cin.ignore(10000,'\n');}
+
             if(select<0 ||select>4){
                 throw("** Invalid Selection. Please Select a Number of Service from 0 to 4! **");
             }
             if(select == 1){
                 int quantity=0;
-                cout<<">> Enter the number of orders: ";
-                cin>>quantity;
+                cout<<">> Enter the number of orders(up to 9): ";
+                string line ;
+                cin >> noskipws;
+                cin >> line ;
+                if((!isdigit(line[1])&&line[1]!='\0')||isdigit(line[1])){
+                    cin.clear();
+                    cin.ignore(10000,'\n');
+                    throw ("** Invalid Quantity. Please Enter Again! **");
+                    continue ;
+                }
+                else quantity = line[0] - '0' ;
+                
                 if (cin.fail() || quantity <= 0){
                     throw("** Invalid Quantity. Please Enter Again! **");
                 }
@@ -420,8 +443,19 @@ void list_in_hotel::call_service(string username)
             }
             else if(select == 2){
                 int quantity=0;
-                cout<<">> Enter the number of clothes/items: ";
-                cin>>quantity;
+                cout<<">> Enter the number of clothes/items(up to 9): ";
+
+                string line ;
+                cin >> noskipws;
+                cin >> line ;
+                if((!isdigit(line[1])&&line[1]!='\0')||isdigit(line[1])){
+                    cin.clear();
+                    cin.ignore(10000,'\n');
+                    throw ("** Invalid Quantity. Please Enter Again! **");
+                    continue ;
+                }
+                else quantity = line[0] - '0' ;
+
                 if (cin.fail() || quantity <= 0){
                     throw("** Invalid Quantity. Please Enter Again! **");
                 }
@@ -439,8 +473,19 @@ void list_in_hotel::call_service(string username)
             }
             else if(select == 3){
                 int quantity=0;
-                cout<<">> Enter the number of shuttle rides you require: ";
-                cin>>quantity;
+                cout<<">> Enter the number of shuttle rides you require(up to 9): ";
+
+                string line ;
+                cin >> noskipws;
+                cin >> line ;
+                if((!isdigit(line[1])&&line[1]!='\0')||isdigit(line[1])){
+                    cin.clear();
+                    cin.ignore(10000,'\n');
+                    throw ("** Invalid Quantity. Please Enter Again! **");
+                    continue ;
+                }
+                else quantity = line[0] - '0' ;
+
                 if (cin.fail() || quantity <= 0){
                     throw("** Invalid Quantity. Please Enter Again! **");
                 }
@@ -458,8 +503,19 @@ void list_in_hotel::call_service(string username)
             }
             else if(select == 4){
                 int quantity=0;
-                cout<<">> Enter the number of Extra Beds you require: ";
-                cin>>quantity;
+                cout<<">> Enter the number of Extra Beds you require(up to 9): ";
+
+                string line ;
+                cin >> noskipws;
+                cin >> line ;
+                if((!isdigit(line[1])&&line[1]!='\0')||isdigit(line[1])){
+                    cin.clear();
+                    cin.ignore(10000,'\n');
+                    throw ("** Invalid Quantity. Please Enter Again! **");
+                    continue ;
+                }
+                else quantity = line[0] - '0' ;
+
                 if (cin.fail() || quantity <= 0){
                     throw("** Invalid Quantity **");
                 }

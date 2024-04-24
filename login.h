@@ -48,6 +48,8 @@ string login(){
             cout <<endl<< ">> Login Successful! <<" << endl;
             std::this_thread::sleep_for(std::chrono::milliseconds(1000)); //ใช้ sleep
             system("clear");
+            cin.clear();
+            cin.ignore(10000,'\n');
             return username;
             
         }          
@@ -109,7 +111,8 @@ void Register() {
         myFile << username << "," << password << endl;
         cout << ">> Registration Successfull! <<" << endl;
     }
-    
+    cin.clear();
+    cin.ignore(10000,'\n');
 }
 bool user_exist(string username){
     
