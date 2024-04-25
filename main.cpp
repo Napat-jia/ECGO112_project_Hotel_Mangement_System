@@ -474,7 +474,7 @@ NODE* Booking(string username,Linked_List** LL)
             cin.clear();
             cin.ignore(10000,'\n');
         }
-        else cout<<"** Invalid input! **"<<endl;
+        else {cout<<"** Invalid input! **"<<endl;cin.clear();cin.ignore(100,'\n');}
 
     }
     while(!check_type)
@@ -523,28 +523,35 @@ NODE* Booking(string username,Linked_List** LL)
         }
         else{
             cout<<"** Invalid Input Please Select Again! **"<<endl;
+            cin.clear();
+            cin.ignore(10000,'\n');
         }
     }
     cout<<"---------------------------"<<endl;
+    cin.clear();
+    cin.ignore(10000,'\n');
     int loop = 1 ;
     while(loop){
 
-        cin.clear();
-        cin.ignore(10000,'\n');
         cout<<"Please enter the number of nights you plan to stay: ";
-        cin>>night;
-
-        if(cin.fail()){
-            cin.clear();
-            cin.ignore(10000,'\n');
-            cout<<"** Invalid Input Please Select Again! **"<<endl;
+    
+        string line ;
+        bool flag = true;
+        cin >> noskipws;
+        cin >> line ;
+        for(int i = 0 ; i < line.length();i++){
+            if(!isdigit(line[i]))flag = false ;
         }
-        else if(night<0){
+        if(!flag) {cout<<"** Invalid input!! **"<<endl;cin.clear();cin.ignore(100,'\n') ;continue;}
+        else night= atoi(line.c_str()) ;
+        
+        if(night<=0){
             cin.clear();
             cin.ignore(10000,'\n');
             cout<<"** Invalid Input Please Select Again! **"<<endl;
         }else loop = 0 ;
     }
+    
     
     NODE* t = new NODE(username,n,room,night);
     cout<<endl<<"-------------------------------------------------------------------------"<<endl;
