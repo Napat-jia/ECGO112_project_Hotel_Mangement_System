@@ -13,7 +13,6 @@ using namespace std;
 #include "room.h"
 
 void Linked_List::insert_node(NODE*&q) {cout << "test " ;}
-bool check_username(string);
 bool confirmOrder();
 
 bool confirmOrder(){
@@ -264,10 +263,10 @@ void list_in_hotel::insert_node(NODE* &q){
 
 void list_in_hotel::check_out(string username,Room room[]){
     NODE* temp=head;
-    int total,cash,id = (temp->show_room_id()) - 1;
     while(temp->show_username()!=username){
         temp=temp->move_next();
     }
+    int total,cash,id = (temp->show_room_id()) - 1;
     std::this_thread::sleep_for(std::chrono::milliseconds(1000)); //ใช้ sleep
     system("clear");
     cout<<endl<<"Username : "<<temp->show_username()<<endl;
